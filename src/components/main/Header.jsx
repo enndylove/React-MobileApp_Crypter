@@ -3,11 +3,10 @@ import Logo from '../../image/main/logo.svg';
 
 const Header = () => {
     return (
-        <header className='header wrapper'>
+        <header className='header wrapper position-relative'>
             <div className='d-flex align-items-center justify-content-between'>
                 <img src={Logo} alt="Logo" />
-                <span className='header__burger'></span>
-                <nav className='header__nav d-none'>
+                <nav className='header__nav position-absolute d-none'>
                     <ul className='header__ul d-flex flex-column'>
                         <li className="nav__item">
                             <a href="#" className="nav__link">
@@ -26,6 +25,7 @@ const Header = () => {
                         </li>
                     </ul>
                 </nav>
+                <span className='header__burger'></span>
             </div>
         </header>
 
