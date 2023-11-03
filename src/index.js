@@ -10,6 +10,7 @@ import Header from './components/main/Header';
 import HomeHero from './components/pages/home/Homehero';
 import HotNFT from './components/pages/home/Hotnft';
 import Featured from './components/pages/home/Featured';
+import Stack from './components/pages/home/Stack';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,5 +19,6 @@ root.render(
     <HomeHero/>
     <HotNFT/>
     <Featured/>
+    <Stack/>
   </React.StrictMode>
 );
