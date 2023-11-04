@@ -10,7 +10,7 @@
   </thead>
 </table>
 
-![](https://i.seadn.io/gae/sSxf_FTMgSPVR1oh0DaxgfFFV1Opjit0Mfy0ZBRLCk7lCczZ7T2RusPK_b4sW0COx5X2JBh-DHyJ6jsKM5L_s0U?auto=format&dpr=1&w=1000)
+![](https://i.seadn.io/gae/sSxf_FTMgSPVR1oh0DaxgfFFV1Opjit0Mfy0ZBRLCk7lCczZ7T2RusPK_b4sW0COx5X2JBh-DHyJ6jsKM5L_s0U?auto=format&dpr=1&w=200)
 
 ## Papar Information
 
