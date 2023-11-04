@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) [2023] [enndylove]
+#### Copyright © 2023 / [enndylove](https://github.com/enndylove/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -11,3 +11,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Creative Commons Attribution-NonCommercial 4.0 International License (CC-BY-NC 4.0)
 
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc/4.0/legalcode.
+
+#### References
+
+- [GitHub readme stats](https://github.com/anuraghazra/github-readme-stats)
+- [Awesome profile readme templates](https://github.com/kautukkundan/Awesome-Profile-README-templates)
+- [Readme](https://github.com/guodongxiaren/README)
+- [Badges shields](https://github.com/badges/shields)
+- [Template readme](https://github.com/DiasEllen26/template-readme)
+- [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/legalcode)
