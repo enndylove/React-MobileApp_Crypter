@@ -314,7 +314,7 @@ a:hover {
   padding: 12px;
   max-width: max-content;
   border-radius: 12px;
-  background-color: var(--darken);
+  background-color: var(--opacity-0775, rgba(32, 32, 37, 0.75)) !important;
 }
 .featured__tagname-name {
   margin-left: 16px;
@@ -463,4 +463,49 @@ a:hover {
 }
 .stack__slide-block.active {
   opacity: 1;
+}
+
+.auction__text-content {
+  background-color: var(--purple);
+}
+.auction__text-btn {
+  padding: 18px 36px;
+  color: var(--darken) !important;
+  background-color: var(--lite-white) !important;
+  border-radius: 4px;
+}
+.auction__btn-list {
+  padding: 2px 8px;
+  margin-left: 12px;
+  border-radius: 12px;
+  background-color: var(--darken-white);
+}
+.auction__btn-wrapper {
+  margin-top: 40px;  
+}
+.auction__post {
+  min-width: 100%;
+}
+.auction__post-content {
+  padding: 24px;
+  min-height: 100%;
+}
+.auction__post-info {
+  margin-top: 20px;
+}
+.auction__info-block + .auction__info-block {
+  margin-left: 24px;
+}
+.color-white {
+  color: var(--lite-white) !important;
+}
+.auction__price {
+  margin: 12px 0 8px;
+}
+.auction__time-content {
+  max-width: 195px;
+}
+.auction__post-img {
+  width: 100%;
+  object-fit: cover;
 }

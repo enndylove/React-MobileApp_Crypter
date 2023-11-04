@@ -1,17 +1,10 @@
 import ImageFeatured3d from '../../../image/pages/home/featured3d.png';
-import ImageFeaturedTagname from '../../../image/pages/home/bionft/bionft1.png';
+import TagAutor from '../../UI/home/TagAutor';
 
 const Featured = () => {
     return (
         <section className='section featured default-padding'>
-            <div className="featured__tagname-block d-flex align-items-center">
-                <div className="featured__tagname-img-block">
-                    <img src={ImageFeaturedTagname} alt="" className="featured__tagname-img" />
-                </div>
-                <h5 className="featured__tagname-name font-title">
-                    @randomdash
-                </h5>
-            </div>
+            <TagAutor/>
             <h2 className="featured__title font-h2">
                 Beyond the Dream.
             </h2>
