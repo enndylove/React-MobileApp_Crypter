@@ -1,70 +1,150 @@
-# Getting Started with Create React App
+# React Mobile App - NFT Crypter <img src="https://img.shields.io/static/v1?label=📂 React App -&message=NFT Crypter 👻&color" />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<table>
+  <thead align="center">
+    <tr border: none;>
+      <td><b>📘 Project</b></td>
+      <td><b>⭐ Stars</b></td>
+      <td><b>🤝 Forks</b></td>
+    </tr>
+  </thead>
+</table>
 
-## Available Scripts
+![](https://i.seadn.io/gae/sSxf_FTMgSPVR1oh0DaxgfFFV1Opjit0Mfy0ZBRLCk7lCczZ7T2RusPK_b4sW0COx5X2JBh-DHyJ6jsKM5L_s0U?auto=format&dpr=1&w=1000)
 
-In the project directory, you can run:
+## Papar Information
 
-### `npm start`
+- Title: `React Mobile App - Crypter`
+- Authors: `enndylove`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Install & Dependence
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React v18.2.0
+- Node v16.13.1
+- Npm v8.1.2
 
-### `npm test`
+## Use
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- for train
+  ```
+  npm start
+  react-scripts start
+  ```
+- for test
+  ```
+  npm test
+  react-scripts test
+  ```
+- for build
+  ```
+  npm build
+  react-scripts build
+  ```
 
-### `npm run build`
+## Directory Hierarchy
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+|—— public
+    |—— index.html
+|—— src
+    |—— bootstrap.min.css
+    |—— components
+    |    |—— main
+    |        |—— Header.jsx
+    |    |—— pages
+    |        |—— home
+    |            |—— Auction.jsx
+    |            a|—— Featured.jsx
+    |            |—— Homehero.jsx
+    |            |—— Hotnft.jsx
+    |            |—— Stack.jsx
+    |    |—— UI
+    |        |—— home
+    |            |—— Bionftblock.jsx
+    |            |—— Stackslide.jsx
+    |            |—— TagAutor.jsx
+    |        |—— main
+    |—— image
+    |    |—— main
+    |        |—— arrow.svg
+    |        |—— hotnftarrow.svg
+    |        |—— logo.svg
+    |        |—— small__arrow.svg
+    |    |—— pages
+    |        |—— home
+    |            |—— auction
+    |                |—— *.png
+    |            |—— bionft
+    |                |—— *.png
+    |            |—— *.png
+    |            |—— stack
+    |                |—— slide
+    |                    |—— block1
+    |                    |—— block2
+    |                    |—— block3
+    |                    |—— block4
+    |                |—— *.svg
+    |—— index.css
+    |—— index.js
+    |—— reset.css
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Code Details
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Tested Platform
 
-### `npm run eject`
+- software
+  ```
+  OS: Windows
+  Versions:
+  Babel-preset-react-app: ^10.0.1
+  React: ^18.2.0
+  React-dom: ^18.2.0
+  React-scripts: 5.0.1
+  ```
+- hardware
+  ```
+  CPU: Intel Core i5
+  GPU: Nvidia GTX1660 Ti (GB)
+  ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Citing
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This application is a decentralized marketplace for buying and selling NFTs (Non-Fungible Tokens). Users can create their own NFTs, purchase NFTs from other users, and have a personalized profile. The application facilitates authentication using NFT platforms like MetaMask and similar platforms.
 
-## Learn More
+#### Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **NFT Listing:** Users can create and list their NFTs for sale on the marketplace.
+- **NFT Purchase:** Users can browse and purchase NFTs from other users.
+- **User Profiles:** Each user has a personalized profile to manage their listed NFTs and transactions.
+- **Secure Authentication:** The app provides secure authentication using NFT platforms such as MetaMask.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Technologies Used
 
-### Code Splitting
+- React
+- Ethereum
+- Solidity
+- MetaMask API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Installation
 
-### Analyzing the Bundle Size
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run `npm install` to install the dependencies.
+4. Configure the environment variables.
+5. Run `npm start` to start the development server.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Usage
 
-### Making a Progressive Web App
+1. Sign in using your MetaMask account.
+2. Create and list your NFTs for sale.
+3. Browse and purchase NFTs from other users.
+4. Manage your profile and transactions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contributing
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are always welcome! Please ensure that any pull requests adhere to the current coding standards and that they have been appropriately tested.
