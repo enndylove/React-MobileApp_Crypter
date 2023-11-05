@@ -54,7 +54,7 @@
     |    |—— pages
     |        |—— home
     |            |—— Auction.jsx
-    |            a|—— Featured.jsx
+    |            |—— Featured.jsx
     |            |—— Homehero.jsx
     |            |—— Hotnft.jsx
     |            |—— Stack.jsx
