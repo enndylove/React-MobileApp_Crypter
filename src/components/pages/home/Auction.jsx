@@ -100,8 +100,11 @@ setTimeout(() => {
             if(parseInt(auctionSec.textContent) === 0) {
                 if(parseInt(auctionMin.textContent) === 0 && parseInt(auctionHrs.textContent) !== 0) {
                     parseInt(auctionHrs.textContent--)
+                    auctionMin.textContent = 59
+                    auctionSec.textContent = 59
                 } else {
                     parseInt(auctionMin.textContent--)
+                    auctionSec.textContent = 59
                 }
             } else {
                 parseInt(auctionSec.textContent--)
