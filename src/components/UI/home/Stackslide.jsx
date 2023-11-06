@@ -1,18 +1,18 @@
 /* eslint-disable eqeqeq */
-import ImageSlide1Big from '../../../image/pages/home/stack/slide/block1/big-image.png'
-import ImageSlide1Small1 from '../../../image/pages/home/stack/slide/block1/small-image1.png'
-import ImageSlide1Small2 from '../../../image/pages/home/stack/slide/block1/small-image2.png'
-import ImageSLide2Big from '../../../image/pages/home/stack/slide/block2/big-image.png'
-import ImageSlide2Small1 from '../../../image/pages/home/stack/slide/block2/small-image1.png'
-import ImageSlide2Small2 from '../../../image/pages/home/stack/slide/block2/small-image2.png'
-import ImageSLide3Big from '../../../image/pages/home/stack/slide/block3/big-image.png'
-import ImageSlide3Small1 from '../../../image/pages/home/stack/slide/block3/small-image1.png'
-import ImageSlide3Small2 from '../../../image/pages/home/stack/slide/block3/small-image2.png'
-import ImageSLide4Big from '../../../image/pages/home/stack/slide/block4/big-image.png'
-import ImageSlide4Small1 from '../../../image/pages/home/stack/slide/block4/small-image1.png'
-import ImageSlide4Small2 from '../../../image/pages/home/stack/slide/block4/small-image2.png'
+import ImageSlide1Big from '../../../image/pages/home/stack/slide/block1/big-image.webp'
+import ImageSlide1Small1 from '../../../image/pages/home/stack/slide/block1/small-image1.webp'
+import ImageSlide1Small2 from '../../../image/pages/home/stack/slide/block1/small-image2.webp'
+import ImageSLide2Big from '../../../image/pages/home/stack/slide/block2/big-image.webp'
+import ImageSlide2Small1 from '../../../image/pages/home/stack/slide/block2/small-image1.webp'
+import ImageSlide2Small2 from '../../../image/pages/home/stack/slide/block2/small-image2.webp'
+import ImageSLide3Big from '../../../image/pages/home/stack/slide/block3/big-image.webp'
+import ImageSlide3Small1 from '../../../image/pages/home/stack/slide/block3/small-image1.webp'
+import ImageSlide3Small2 from '../../../image/pages/home/stack/slide/block3/small-image2.webp'
+import ImageSLide4Big from '../../../image/pages/home/stack/slide/block4/big-image.webp'
+import ImageSlide4Small1 from '../../../image/pages/home/stack/slide/block4/small-image1.webp'
+import ImageSlide4Small2 from '../../../image/pages/home/stack/slide/block4/small-image2.webp'
 
-import ImageAutor1 from '../../../image/pages/home/bionft/bionft1.png'
+import ImageAutor1 from '../../../image/pages/home/bionft/bionft1.webp'
 
 let slidesinfo = [
     {
@@ -63,10 +63,10 @@ let slidesinfo = [
 let slideinfo = slidesinfo.map((info) => `
     <div class="stack__slide-block w-100">
     <div class="stack__slide-images d-flex flex-column w-100 align-items-center">
-        <img src=${info._bigimg} alt="" class="stack__slide-image" />
+        <img data-src=${info._bigimg} src=${info._bigimg} alt="" class="stack__slide-image" />
         <div class="stack__sup-images d-flex w-100 justify-content-between align-items-center">
-            <img src=${info._smallimg1} alt="" class="stack__sup-image" />
-            <img src=${info._smallimg2} alt="" class="stack__sup-image" />
+            <img data-src=${info._smallimg1} src=${info._smallimg1} alt="" class="stack__sup-image" />
+            <img data-src=${info._smallimg2} src=${info._smallimg2} alt="" class="stack__sup-image" />
             <span class="stack__sup-more stack__sup-image d-flex align-items-center justify-content-center font-body1">
                 ${info._num_more}
             </span>

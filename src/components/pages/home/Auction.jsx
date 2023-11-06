@@ -1,4 +1,4 @@
-import PostBgImage from '../../../image/pages/home/auction/bg-img-post.png'
+import PostBgImage from '../../../image/pages/home/auction/bg-img-post.webp'
 import TagAutor from '../../UI/home/TagAutor';
 
 let auctionPriceUsdt, auctionPrice
@@ -27,7 +27,7 @@ const Auction = () => {
 
             <div className="auction__post position-relative">
 
-                <img src={PostBgImage} alt="" className="auction__post-img position-absolute" />
+                <img data-src={PostBgImage} alt="" className="auction__post-img position-absolute" />
 
                 <div className="auction__post-content w-100 position-absolute d-flex flex-column justify-content-between">
                     <TagAutor/>

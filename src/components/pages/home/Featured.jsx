@@ -1,4 +1,4 @@
-import ImageFeatured3d from '../../../image/pages/home/featured3d.png';
+import ImageFeatured3d from '../../../image/pages/home/featured3d.webp';
 import TagAutor from '../../UI/home/TagAutor';
 
 const Featured = () => {
@@ -19,13 +19,13 @@ const Featured = () => {
                     $24,635.39    
                 </h5>       
             </div>
-            <div className="featured__btn featured__btn-btn font-button w-100">
+            <div className="featured__btn font-button w-100">
                 <a href="#" className="featured__btn-btn">
                     make offer
                 </a>
             </div>
 
-            <img src={ImageFeatured3d} alt="" className="featured__img" />
+            <img data-src={ImageFeatured3d} alt="" className="featured__img" />
         </section>
     );
 };

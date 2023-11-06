@@ -47,10 +47,15 @@
 |—— public
     |—— index.html
 |—— src
+    |—— fonts.css
     |—— bootstrap.min.css
     |—— components
     |    |—— main
+    |        |—— pages
+    |           |—— Homepage.jsx
+    |        |—— Preloader.jsx
     |        |—— Header.jsx
+    |        |—— Lazyload.jsx
     |    |—— pages
     |        |—— home
     |            |—— Auction.jsx
@@ -73,10 +78,10 @@
     |    |—— pages
     |        |—— home
     |            |—— auction
-    |                |—— *.png
+    |                |—— *.webp
     |            |—— bionft
-    |                |—— *.png
-    |            |—— *.png
+    |                |—— *.webp
+    |            |—— *.webp
     |            |—— stack
     |                |—— slide
     |                    |—— block1
@@ -94,14 +99,19 @@
 ### Tested Platform
 
 - software
+
   ```
   OS: Windows
+
   Versions:
   Babel-preset-react-app: ^10.0.1
   React: ^18.2.0
   React-dom: ^18.2.0
   React-scripts: 5.0.1
+  React-Router-Dom: ^6.18.0
+  Lazy: ^1.0.11
   ```
+
 - hardware
   ```
   CPU: Intel Core i5
@@ -129,6 +139,8 @@ This application is a decentralized marketplace for buying and selling NFTs (Non
 - Ethereum
 - Solidity
 - MetaMask API
+- Lazy
+- Router
 
 #### Installation
 

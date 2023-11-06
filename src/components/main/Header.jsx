@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <header className='header wrapper position-relative'>
             <div className='d-flex align-items-center justify-content-between'>
-                <img src={Logo} alt="Logo" />
+                <img className='header__logo' data-src={Logo} alt="Logo" />
                 <nav className='header__nav position-absolute d-none'>
                     <ul className='header__ul d-flex flex-column'>
                         <li className="nav__item">
@@ -31,6 +31,5 @@ const Header = () => {
 
     );
 };
-
 
 export default Header

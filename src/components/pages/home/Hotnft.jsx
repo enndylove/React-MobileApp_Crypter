@@ -10,7 +10,7 @@ const HotNFT = () => {
                 </h3>
                 <div className="hotnft__arrow-link d-flex">
                     <a href="#" className="">
-                        <img className='' src={HotNftArrow} alt="" />
+                        <img className='' data-src={HotNftArrow} alt="" />
                     </a>                    
                 </div>
 
