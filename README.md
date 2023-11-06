@@ -114,7 +114,7 @@
 
 - hardware
   ```
-  CPU: Intel Core i5
+  CPU: Intel Core i5-9300HF 2.40Ghz
   GPU: Nvidia GTX1660 Ti (GB)
   ```
 
