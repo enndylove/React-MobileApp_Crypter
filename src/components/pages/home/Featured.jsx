@@ -1,5 +1,5 @@
 import ImageFeatured3d from '../../../image/pages/home/featured3d.webp';
-import TagAutor from '../../UI/home/TagAutor';
+import TagAutor from '../../UI/pages/home/TagAutor';
 
 const Featured = () => {
     return (

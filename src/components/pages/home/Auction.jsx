@@ -1,5 +1,5 @@
 import PostBgImage from '../../../image/pages/home/auction/bg-img-post.webp'
-import TagAutor from '../../UI/home/TagAutor';
+import TagAutor from '../../UI/pages/home/TagAutor';
 
 let auctionPriceUsdt, auctionPrice
 auctionPrice = 8.00

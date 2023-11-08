@@ -1,4 +1,4 @@
-import StackSlide from '../../UI/home/Stackslide';
+import StackSlide from '../../UI/pages/home/Stackslide';
 
 const Stack = () => {
     return (

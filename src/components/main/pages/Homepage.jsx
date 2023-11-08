@@ -1,21 +1,29 @@
 import { lazy } from 'react';
 
 const Header = lazy (() => import('../../main/Header'))
+
 const HomeHero = lazy (() => import('../../pages/home/Homehero'))
 const HotNFT = lazy (() => import('../../pages/home/Hotnft'))
 const Featured = lazy (() => import('../../pages/home/Featured'))
 const Stack = lazy (() => import('../../pages/home/Stack'))
 const Auction = lazy (() => import('../../pages/home/Auction'))
+const Spotlight = lazy (() => import('../../pages/home/Spotlight'));
+
 const LazyLoad = lazy (() => import('../../main/Lazyload'))
+
+
 const HomePage = () => {
     return (
         <div>
             <Header />
+            
             <HomeHero />
             <HotNFT />
             <Featured />
             <Stack />
             <Auction />
+            <Spotlight />
+
             <LazyLoad />
         </div>
     );

@@ -116,7 +116,7 @@ body {
   left: 0;
   top: 0;
   position: fixed;
-  background-color: var(--darken);
+  background-color: var(--black);
   z-index: 100000;
 }
 .preloader-img-wrapper.active {
@@ -526,6 +526,10 @@ a:hover {
   background-color: var(--lite-white) !important;
   border-radius: 4px;
 }
+.auction__text-btn:hover {
+  color: var(--lite-white) !important;
+  background-color: var(--darken) !important;
+}
 .auction__btn-list {
   padding: 2px 8px;
   margin-left: 12px;
@@ -560,4 +564,62 @@ a:hover {
 .auction__post-img {
   width: 100%;
   object-fit: cover;
+}
+
+
+.spotlight {
+  background-color: var(--black);
+}
+.spotlight__text-info {
+  margin-top: 20px;
+  color: var(--gray) !important;
+}
+.spotlight__text-content {
+  margin-bottom: 48px;
+}
+.spotlight__tag-block {
+  margin-top: 32px;
+}
+.spotlight__tag-content + .spotlight__tag-content {
+  margin-left: 12px;
+}
+.spotlight__tag-content {
+  padding: 8px 24px;
+  border-radius: 40px;
+  background-color: var(--black);
+}
+.spotlight__tag-content.active {
+  background-color: var(--lite-white) !important;
+  color: var(--black);
+}
+.spotlight__price-eth {
+  margin-left: 4px;
+}
+.spotlight__content-price {
+  margin-top: 8px;
+}
+.spotlight__content-block {
+  margin-top: 24px;
+}
+.spotlight__avatar {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  margin: 0 0 0 -12px;
+}
+.spotlight__avatars {
+  max-width: calc(100% - 30%);
+}
+.spotlight__img {
+  border-radius: 20px;
+  width: 100%;
+  height: max-content;
+  object-fit: cover;
+}
+.spotlight__content + .spotlight__content {
+  margin-top: 32px;
+}
+.spotlight__btn-wrapper {
+  margin-top: 48px;
 }

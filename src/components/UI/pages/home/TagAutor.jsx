@@ -1,4 +1,4 @@
-import ImageFeaturedTagname from '../../../image/pages/home/bionft/bionft1.webp';
+import ImageFeaturedTagname from '../../../../image/pages/home/bionft/bionft1.webp';
 
 const TagAutor = () => {
     return (

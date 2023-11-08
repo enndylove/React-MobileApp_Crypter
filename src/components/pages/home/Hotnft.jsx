@@ -1,5 +1,5 @@
 import HotNftArrow from '../../../image/main/hotnftarrow.svg'
-import BioNFTblock from '../../UI/home/Bionftblock'
+import BioNFTblock from '../../UI/pages/home/Bionftblock'
 
 const HotNFT = () => {
     return (
