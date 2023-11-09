@@ -8,6 +8,7 @@ const Featured = lazy (() => import('../../pages/home/Featured'))
 const Stack = lazy (() => import('../../pages/home/Stack'))
 const Auction = lazy (() => import('../../pages/home/Auction'))
 const Spotlight = lazy (() => import('../../pages/home/Spotlight'));
+const Blog = lazy (() => import('../../pages/home/Blog'))
 
 const LazyLoad = lazy (() => import('../../main/Lazyload'))
 
@@ -23,6 +24,7 @@ const HomePage = () => {
             <Stack />
             <Auction />
             <Spotlight />
+            <Blog />
 
             <LazyLoad />
         </div>
