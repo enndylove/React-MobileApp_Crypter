@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 const Cookie = () => {
     useEffect(() => {
-        if (document.cookie === 'acceptCoocies=accept') { 
+        if (document.cookie === 'acceptCookies=accept') { 
             document.querySelector('.cookie').remove()
         }
     })
@@ -26,9 +26,9 @@ const Cookie = () => {
 
     const acceptCookie = (e) => {
         setCookie('acceptCookies', 'accept', 7);
-        const myCookieValue = getCookie('acceptCoocies');
+        const myCookieValue = getCookie('acceptCookies');
         console.log(myCookieValue);
-        if (document.cookie === 'acceptCoocies=accept') { 
+        if (document.cookie === 'acceptCookies=accept') { 
             document.querySelector('.cookie').remove()
         }
     }
