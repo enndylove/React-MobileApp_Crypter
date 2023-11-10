@@ -10,6 +10,7 @@ const Spotlight = lazy (() => import('../../pages/home/Spotlight'));
 const Blog = lazy (() => import('../../pages/home/Blog'))
 const Download = lazy(() => import('../../UI/main/Download'));
 const Footer = lazy(() => import('../Footer'));
+const Cookie = lazy(() => import('../Cookie'));
 
 const LazyLoad = lazy (() => import('../Lazyload'))
 
@@ -28,6 +29,7 @@ const HomePage = () => {
             <Blog />
             <Download />
             <Footer />
+            <Cookie />
 
             <LazyLoad />
         </>
