@@ -25,7 +25,7 @@ const Cookie = () => {
 
 
     const acceptCookie = (e) => {
-        setCookie('acceptCoocies', 'accept', 7);
+        setCookie('acceptCookies', 'accept', 7);
         const myCookieValue = getCookie('acceptCoocies');
         console.log(myCookieValue);
         if (document.cookie === 'acceptCoocies=accept') { 
