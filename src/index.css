@@ -555,6 +555,9 @@ a:hover {
 .color-white {
   color: var(--lite-white) !important;
 }
+.color-darken {
+  color: var(--darken) !important;
+}
 .auction__price {
   margin: 12px 0 8px;
 }
@@ -671,4 +674,97 @@ a:hover {
   width: 24px;
   height: 24px;
   object-fit: cover;
+}
+
+
+.download {
+  background-color: var(--accent4);
+}
+.download-newsletter__content {
+  margin-top: 88px;
+}
+
+.download__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0;
+  border-radius: 4px;
+  background-color: var(--darken);
+  color: var(--lite-white);
+}
+.download__button.white {
+  background-color: var(--lite-white);
+  color: var(--darken);
+}
+.dowload__button-icon {
+  margin-left: 12px;
+  transition: .5s;
+}
+.dowload__button-icon path {
+  stroke: var(--lite-white);
+  fill: none;
+  transition: .5s;
+}
+.dowload__button-icon.white path {
+  stroke: var(--darken);
+}
+.download__button:hover {
+  color: var(--lite-white) !important
+}
+.download__button:hover .dowload__button-icon {
+  transform: translateX(10px);
+}
+.download__button.white:hover {
+  color: var(--darken) !important
+}
+.download__button-wrapper {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.download__button-wrapper + .download__button-wrapper {
+  margin-top: 20px;
+}
+
+.download__info {
+  margin-bottom: 32px;
+}
+
+.newsletter {
+  background-color: var(--darken);
+}
+.newsletter__info {
+  margin-bottom: 12px;
+}
+
+.newsletter__input {
+  border-left: 0px solid var(--lite-white);
+  border-right: 0px solid var(--lite-white);
+  border-bottom: 1px solid var(--darken-gray);
+  padding: 16px 0;
+  background-color: transparent !important;
+  color: var(--darken-white) !important;
+}
+.newsletter__input::placeholder {
+  color: var(--darken-white) !important;
+}
+.newsletter__input + .newsletter__input {
+  margin-top: 32px;
+}
+.newsletter__form-btn {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0;
+  border-radius: 4px;
+  margin-top: 40px;
+  color: var(--darken) !important;
+  background-color: var(--lite-white) !important;
+  transition: .5s;
+}
+.newsletter__form-btn:hover {
+  color: var(--lite-white) !important;
+  background-color: var(--darken) !important;
 }

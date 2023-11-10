@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense } from 'react';
+import './fonts.css'
 import './bootstrap.min.css';
 import './reset.css';
 import './index.css';
