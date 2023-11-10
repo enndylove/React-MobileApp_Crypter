@@ -768,3 +768,30 @@ a:hover {
   color: var(--lite-white) !important;
   background-color: var(--darken) !important;
 }
+
+
+.footer__block {
+  padding: 40px 24px;
+  background-color: #fff;
+  border-bottom: 1px solid var(--darken-white);
+}
+.footer__logo {
+  width: 218px;
+  height: max-content;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+.footer__sub {
+  margin-bottom: 32px;
+}
+.footer__content-title {
+  margin-bottom: 16px;
+}
+.footer__item + .footer__item {
+  margin-top: 14px;
+}
+.footer__licence {
+  width: 100%;
+  text-align: center;
+  padding: 24px;
+}
