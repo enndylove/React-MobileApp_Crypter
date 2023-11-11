@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkapp=self.webpackChunkapp||[]).push([[119],{9119:(e,r,t)=>{t.r(r),t.d(r,{default:()=>c});var s=t(2791);const c=()=>{(0,s.useEffect)((()=>{const e=document.querySelectorAll("img"),r=new IntersectionObserver(((e,r)=>{e.forEach((e=>{if(e.isIntersecting){const t=e.target;t.src=t.dataset.src,r.unobserve(t)}}))}),{root:null,rootMargin:"0px",threshold:.1});return e.forEach((e=>{r.observe(e)})),()=>{r.disconnect()}}),[])}}}]);
+//# sourceMappingURL=119.123ef31c.chunk.js.map
