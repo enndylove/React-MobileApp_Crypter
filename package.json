@@ -10,6 +10,7 @@
     "babel-preset-react-app": "^10.0.1",
     "lazy": "^1.0.11",
     "react": "^18.2.0",
+    "react-animated-css": "^1.2.1",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
@@ -40,5 +41,9 @@
   },
   "devDependencies": {
     "react-router-dom": "^6.18.0"
+  },
+  "engines": {
+    "node": "v16.13.1",
+    "npm": "8.1.2"
   }
 }

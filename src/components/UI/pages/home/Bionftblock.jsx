@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Animated } from 'react-animated-css';
 import ImageNft1 from "../../../../image/pages/home/bionft/bionft1.webp";
 import ImageNft2 from "../../../../image/pages/home/bionft/bionft2.webp";
 import ImageNft3 from "../../../../image/pages/home/bionft/bionft3.webp";
@@ -78,9 +79,9 @@ const BioNFTblock = () => {
     let hotNFTblocks = document.querySelector('.hotnft__blocks');
     for (let i = 0; i < persons.length; i++) {
       const person = persons[i];
-      const block = document.createElement('div');
-      block.className = 'hotnft__block d-flex flex-column';
-
+      const block = document.createElement('Animated');
+      block.className = 'hotnft__block d-flex flex-column wow'; 
+      block.setAttribute('style', 'animation-delay: 0ms; animation-duration: 1000ms; pointer-events: all; animation-name: fadeIn;')
       const id = document.createElement('span');
       id.className = 'hotnft__id font-caption';
       id.textContent = person.id;

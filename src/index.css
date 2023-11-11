@@ -220,6 +220,15 @@ a:hover {
 .placeholder-img {
   width: 24px;
   height: 24px;
+  animation: placeholderScaleAnimation 1s linear infinite alternate;
+}
+@keyframes placeholderScaleAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
 }
 .default-padding {
   padding: 48px 24px;
@@ -230,6 +239,44 @@ a:hover {
 .homehero__arrow-img {
   width: 118px;
   height: 100%;
+  animation: homeheroWidthAnimated 1s linear alternate;
+}
+.homehero__title {
+  position: relative;
+}
+
+.homehero__title span {
+  position: relative;
+  transition: opacity 0.2s ease-in-out;
+  animation: beforeTextAnimated .2s linear alternate;
+}
+
+.homehero__title span:last-child::after {
+  content: "";
+  position: absolute;
+  right: -80%;
+  bottom: 10px;
+  width: 8px;
+  height: 55px;
+  background-color: var(--darken);
+  animation: beforeTextAnimated 1s linear infinite alternate;
+}
+
+@keyframes beforeTextAnimated {
+  to {
+    opacity: 1;
+  }
+  from {
+    opacity: 0;
+  }
+}
+@keyframes homeheroWidthAnimated {
+  from {
+    width: 0;
+  }
+  to {
+    width: 118px;
+  }
 }
 .homehero__info {
   margin-top: 32px;
@@ -809,4 +856,5 @@ a:hover {
 .cookie__btn {
   padding: 8px 20px;
   border: 1px solid var(--darken);
+  cursor: pointer;
 }

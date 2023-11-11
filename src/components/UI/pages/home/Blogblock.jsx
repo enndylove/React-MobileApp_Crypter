@@ -36,8 +36,8 @@ function etsTxt(element) {
     if(ets.length >= 0) {
         let etsS = ets.map((etsT) => `
         <div class="blog__post-idot d-flex align-items-center">
-            <img loading="lazy" data-src=${IDot} src=${IDot} alt="" class="blog__idot" />
-            <p class="blog__idot-info font-body2">
+            <img loading="lazy" data-src=${IDot} src=${IDot} alt="" class="blog__idot wow" style="animation-delay: 0ms; animation-duration: 1200ms; pointer-events: all; animation-name: fadeIn;" />
+            <p class="blog__idot-info font-body2 wow" style="animation-delay: 0ms; animation-duration: 1400ms; pointer-events: all; animation-name: fadeIn;">
                 ${etsT}
             </p>
         </div>
@@ -56,23 +56,23 @@ function etsTxt(element) {
 }
 
 let posts = postsInfo.map((post) => `
-<div class="blog__post">
-<img loading="lazy" data-src=${post._image} src=${post._image} alt="" class="blog__post-img" />
-<div class="blog__post-content">
-    <h3 class="blog__post-title font-h3">
-        ${post.title}
-    </h3>
-    <p class="blog__post-info font-body2">
-        ${post.info}
-    </p>
-    ${etsTxt(post)}
-    <div class="blog__btn-wrapp">
-        <a href="#" class="blog__btn font-button">
-            learn more
-        </a>
+    <div class="blog__post">
+    <img loading="lazy" data-src=${post._image} src=${post._image} alt="" class="blog__post-img wow" style="animation-delay: 0ms; animation-duration: 1000ms; pointer-events: all; animation-name: fadeIn;" />
+    <div class="blog__post-content">
+        <h3 class="blog__post-title font-h3 wow" style="animation-delay: 0ms; animation-duration: 1000ms; pointer-events: all; animation-name: fadeIn;">
+            ${post.title}
+        </h3>
+        <p class="blog__post-info font-body2 wow" style="animation-delay: 0ms; animation-duration: 1200ms; pointer-events: all; animation-name: fadeIn;">
+            ${post.info}
+        </p>
+        ${etsTxt(post)}
+        <div class="blog__btn-wrapp wow" style="animation-delay: 0ms; animation-duration: 1000ms; pointer-events: all; animation-name: fadeIn;">
+            <a href="#" class="blog__btn font-button">
+                learn more
+            </a>
+        </div>
     </div>
-</div>
-</div>
+    </div>
 `)
 
 const BlogBlock = () => {

@@ -74,7 +74,7 @@ let slideinfo = slidesinfo.map((info) => `
         </div>
     </div>
     <div class="stack__slide-content w-100">
-        <div class="stack__slide-info d-flex justify-content-between">
+        <div class="stack__slide-info d-flex justify-content-between wow" style="animation-delay: 0ms; animation-duration: 1000ms; pointer-events: all; animation-name: fadeIn;">
             <p class="stack__slide-text font-body1">
                 ${info._name}
             </p>
@@ -82,7 +82,7 @@ let slideinfo = slidesinfo.map((info) => `
                 ${info._floor_state}
             </p>
         </div>
-        <div class="stack__slide-autor d-flex w-100 justify-content-between align-items-center">
+        <div class="stack__slide-autor d-flex w-100 justify-content-between align-items-center wow" style="animation-delay: 0ms; animation-duration: 1000ms; pointer-events: all; animation-name: fadeIn;">
             <span class="stack__autor-content font-title d-flex align-items-center">
                 <div class="stack__autor-avatar-block">
                     <img loading="lazy" class='stack__autor-avatar' data-src=${info._autor_avatar} src=${info._autor_avatar} alt="" />

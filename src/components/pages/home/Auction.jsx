@@ -1,3 +1,4 @@
+import { Animated } from 'react-animated-css';
 import PostBgImage from '../../../image/pages/home/auction/bg-img-post.webp'
 import TagAutor from '../../UI/pages/home/TagAutor';
 
@@ -8,20 +9,22 @@ const Auction = () => {
     return (
         <section className="section auction">
             <div className="auction__text-content default-padding">
+                <Animated className='wow' animationIn="fadeInUp" isVisible={true} animationInDuration={1000}>
+                    <h3 className="auction__text-title font-h3">
+                        Auctions ending soon
+                    </h3>
+                </Animated>
 
-                <h3 className="auction__text-title font-h3">
-                    Auctions ending soon
-                </h3>
 
                 <div className="auction__btn-wrapper">
-
-                    <a href="#" className="auction__text-btn font-button">
-                        explorer more
-                        <span className="auction__btn-list font-button">
-                            109
-                        </span>
-                    </a> 
-
+                    <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={1000}>
+                        <a href="#" className="auction__text-btn font-button">
+                            explorer more
+                            <span className="auction__btn-list font-button">
+                                109
+                            </span>
+                        </a>                         
+                    </Animated>
                 </div>
             </div>
 
@@ -34,50 +37,60 @@ const Auction = () => {
                     <div className="auction__post-info d-flex justify-content-between w-100">
 
                         <div className="auction__info-block">
-
-                            <p className="auction__price-sub font-base color-white">
-                                Current bid
-                            </p>
-                            <h5 className="auction__price font-h4 color-white">
-                                {auctionPrice.toFixed(2)} ETH
-                            </h5>
-                            <p className="auction__price-usdt font-base color-white">
-                                ${auctionPriceUsdt.toFixed(2)}
-                            </p>
-
+                            <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={600}>
+                                <p className="auction__price-sub font-base color-white">
+                                    Current bid
+                                </p>
+                            </Animated>
+                            <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={800}>
+                                <h5 className="auction__price font-h4 color-white">
+                                    {auctionPrice.toFixed(2)} ETH
+                                </h5>
+                            </Animated>
+                            <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={1000}>
+                                <p className="auction__price-usdt font-base color-white">
+                                    ${auctionPriceUsdt.toFixed(2)}
+                                </p>
+                            </Animated>
                         </div>
 
                         <div className="auction__info-block auction__time-content w-100">
-
-                            <p className="auction__price-sub font-base color-white">
-                                Auction ends in
-                            </p>
+                            <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={600}>
+                                <p className="auction__price-sub font-base color-white">
+                                    Auction ends in
+                                </p>
+                            </Animated>
                             <div className="auction__time-block d-flex align-items-center justify-content-between w-100">
-                                <div className="auction__time-hrs auction__time">
-                                    <h5 className="auction__price font-h4 color-white auction__hrs">
-                                        24
-                                    </h5>
-                                    <p className="auction__price-usdt font-base color-white">
-                                        hrs
-                                    </p>
-                                </div>
-                                <div className="auction__time-min auction__time">
-                                    <h5 className="auction__price font-h4 color-white auction__min">
-                                        59
-                                    </h5>
-                                    <p className="auction__price-usdt font-base color-white">
-                                        min
-                                    </p>
-                                </div>
-                                <div className="auction__time-sec auction__time">
-                                    <h5 className="auction__price font-h4 color-white auction__sec">
-                                        59
-                                    </h5>
-                                    <p className="auction__price-usdt font-base color-white">
-                                        sec
-                                    </p>
-
-                                </div>
+                                <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={800}>
+                                    <div className="auction__time-hrs auction__time">
+                                        <h5 className="auction__price font-h4 color-white auction__hrs">
+                                            24
+                                        </h5>
+                                        <p className="auction__price-usdt font-base color-white">
+                                            hrs
+                                        </p>
+                                    </div>
+                                </Animated>
+                                <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={900}>
+                                    <div className="auction__time-min auction__time">
+                                        <h5 className="auction__price font-h4 color-white auction__min">
+                                            59
+                                        </h5>
+                                        <p className="auction__price-usdt font-base color-white">
+                                            min
+                                        </p>
+                                    </div>
+                                </Animated>
+                                <Animated className='wow' animationIn="fadeIn" isVisible={true} animationInDuration={1000}>
+                                    <div className="auction__time-sec auction__time">
+                                        <h5 className="auction__price font-h4 color-white auction__sec">
+                                            59
+                                        </h5>
+                                        <p className="auction__price-usdt font-base color-white">
+                                            sec
+                                        </p>
+                                    </div>
+                                </Animated>
                             </div>
                         </div>
                     </div>

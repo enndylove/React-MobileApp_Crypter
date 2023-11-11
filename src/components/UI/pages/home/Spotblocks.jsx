@@ -140,20 +140,20 @@ const postInfo = [
 ]
 let posts = postInfo.map((post) => `
     <div class="spotlight__content w-100">
-        <img loading="lazy" data-src=${post.IMAGE} src=${post.IMAGE} alt="" class="spotlight__img w-100" />
+        <img loading="lazy" data-src=${post.IMAGE} src=${post.IMAGE} alt="" class="spotlight__img w-100 wow" style="animation-delay: 0ms; animation-duration: 1000ms; pointer-events: all; animation-name: fadeIn;" />
         <div class="spotlight__content-block d-flex align-items-center justify-content-between">
             <div class="spotlight__block">
-                <h5 class="spotlight__content-title color-white font-body1">
+                <h5 class="spotlight__content-title color-white font-body1 wow" style="animation-delay: 0ms; animation-duration: 1200ms; pointer-events: all; animation-name: fadeIn;">
                     ${post.TITLE}
                 </h5>
-                <p class="spotlight__content-price font-base">
+                <p class="spotlight__content-price font-base wow" style="animation-delay: 0ms; animation-duration: 1400ms; pointer-events: all; animation-name: fadeIn;">
                     Buy now
                     <span class="color-white font-base spotlight__price-eth">
                         ${post.PRICE} ETH
                     </span>
                 </p>
             </div>
-            <div class="spotlight__avatars d-flex flex-nowrap">
+            <div class="spotlight__avatars d-flex flex-nowrap wow" style="animation-delay: 0ms; animation-duration: 1400ms; pointer-events: all; animation-name: fadeIn;">
                 <div class="spotlight__avatar-block">
                     <img loading="lazy" data-src=${post.AVATARS._avatar1} src=${post.AVATARS._avatar1} alt="" class="spotlight__avatar" />
                 </div>
