@@ -1,0 +1,2 @@
+(this.webpackJsonpapp=this.webpackJsonpapp||[]).push([[23],{669:function(e,t,r){"use strict";r.r(t);var s=r(0);t.default=()=>{Object(s.useEffect)((()=>{const e=document.querySelectorAll("img"),t=new IntersectionObserver(((e,t)=>{e.forEach((e=>{if(e.isIntersecting){const r=e.target;r.src=r.dataset.src,t.unobserve(r)}}))}),{root:null,rootMargin:"0px",threshold:.1});return e.forEach((e=>{t.observe(e)})),()=>{t.disconnect()}}),[])}}}]);
+//# sourceMappingURL=23.ab31d204.chunk.js.map

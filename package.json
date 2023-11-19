@@ -7,12 +7,20 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@web3modal/ethereum": "^2.7.1",
+    "@web3modal/react": "^2.7.1",
+    "@web3modal/wagmi": "^3.3.2",
     "babel-preset-react-app": "^10.0.1",
+    "ethers": "^5.7.2",
+    "http": "^0.0.1-security",
     "lazy": "^1.0.11",
     "react": "^18.2.0",
     "react-animated-css": "^1.2.1",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.69.5",
+    "viem": "^1.19.3",
+    "wagmi": "^1.4.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -27,20 +35,14 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "devDependencies": {
-    "react-router-dom": "^6.18.0"
+    "react-router-dom": "^6.19.0",
+    "react-scripts": "^4.0.3"
   },
   "engines": {
     "node": "v16.13.1",

@@ -1,0 +1,13 @@
+$darken: #202025;
+$gray: #686A6C;
+.cookie {
+    &__dark {
+        max-width: 400px;
+        border-radius: 12px;
+        padding: 16px 24px;
+        background-color: $darken;
+        &-info {
+            color: $gray;
+        }
+    }
+}

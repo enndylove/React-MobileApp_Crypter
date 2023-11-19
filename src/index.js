@@ -8,12 +8,28 @@ import './index.css';
 
 import Preloader from './components/main/Preloader';
 import HomePage from './components/main/pages/Home';
+import ConnectWallet from './components/main/pages/ConnectWallet';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-          <Route index element={<Suspense fallback={<Preloader />}> <HomePage/> </Suspense>}  />
+        <Route
+          index
+          element={
+            <Suspense fallback={<Preloader />}>
+              <HomePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/connectwallet"
+          element={
+            <Suspense fallback={<Preloader />}>
+              <ConnectWallet />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

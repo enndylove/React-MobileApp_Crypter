@@ -23,7 +23,7 @@ const HomeHero = () => {
           return prevText;
         }
       });
-    }, 200);
+    }, 100);
 
     return () => clearInterval(intervalId);
   }, []);
