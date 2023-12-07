@@ -16,6 +16,7 @@
 
 - Title: `React Mobile App - Crypter`
 - Authors: `enndylove`
+<!--
 
 ## Install & Dependence
 
@@ -159,4 +160,4 @@ This application is a decentralized marketplace for buying and selling NFTs (Non
 
 ## Contributing
 
-Contributions are always welcome! Please ensure that any pull requests adhere to the current coding standards and that they have been appropriately tested.
+Contributions are always welcome! Please ensure that any pull requests adhere to the current coding standards and that they have been appropriately tested. -->
