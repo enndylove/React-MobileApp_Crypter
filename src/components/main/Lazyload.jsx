@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 const LazyLoad = () => {
   useEffect(() => {
-    const images = document.querySelectorAll('img');
+    const images = document.querySelectorAll("img");
 
     const options = {
       root: null,
-      rootMargin: '0px',
+      rootMargin: "0px",
       threshold: 0.1,
     };
 

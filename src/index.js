@@ -32,14 +32,14 @@ export default function App() {
             </Suspense>
           }
         />
-        <Route
-          path="/profile"
-          element={
-            <Suspense fallback={<Preloader />}>
-              <Profile />
-            </Suspense>
-          }
-        />
+      <Route
+        path="/profile"
+        element={
+          <Suspense fallback={<Preloader />}>
+            <Profile />
+          </Suspense>
+        }
+      />
       </Routes>
     </BrowserRouter>
   );

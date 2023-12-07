@@ -1,3 +1,3 @@
-import IBanner from '../../../../image/pages/profile/banner.webp'
+import IBanner from "../../../../image/pages/profile/banner.webp";
 
-export default IBanner
+export default IBanner;

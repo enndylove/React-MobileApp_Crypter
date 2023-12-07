@@ -19,7 +19,13 @@ $purple: #B9A9FB;
             background-color: #fff;
         }
         &-name {
-            margin-bottom: 12px;
+            margin-bottom: 6px;
+            span {
+                margin-left: 12px;
+                padding: 2px 8px;
+                background-color: #00ffbf;
+                border-radius: 18px;
+            }
         }
         &-tagname {
             margin-right: 20px;
