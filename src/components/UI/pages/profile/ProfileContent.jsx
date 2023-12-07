@@ -30,16 +30,26 @@ const ProfileContent = () => {
         address: address,
       });
       const name = await Moralis.EvmApi.resolve.resolveAddress({
-        address: "0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326",
+        address: address,
       });
       const resp = await Moralis.EvmApi.nft.getWalletNFTs({
         address: address,
         chain: response.raw.active_chains[0].chain_id,
       });
+      if (response.raw.address) {
+        localStorage.setItem("connect_api", true);
+      } else {
+        localStorage.setItem("connect_api", false);
+      }
       localStorage.setItem("address", response.raw.address);
       localStorage.setItem("balance", balance.raw.balance);
-      localStorage.setItem("name", name.raw.name);
-      localStorage.setItem("tag_name", "@" + name.raw.name);
+      if (name.raw.name) {
+        localStorage.setItem("name", name.raw.name);
+        localStorage.setItem("tag_name", "@" + name.raw.name);
+      } else {
+        localStorage.setItem("name", "username");
+        localStorage.setItem("tag_name", "@username");
+      }
       localStorage.setItem(
         "addressClip",
         response.raw.address.substring(0, 6) +
@@ -169,6 +179,9 @@ const ProfileContent = () => {
       if (followBtn.classList.contains("active")) {
         followBtn.classList.remove("active");
       }
+    }
+    if (localStorage.getItem("connect_api") === "false") {
+      window.location = "/connectWallet";
     }
   }, []);
 

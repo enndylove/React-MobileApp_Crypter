@@ -1,5 +1,7 @@
 import { lazy, useEffect } from "react";
+import { mainnet } from "@wagmi/core/chains";
 
+import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi";
 import {
   Imeta,
   Iwallet,
@@ -107,6 +109,35 @@ const Choose = () => {
       });
     }, 20);
   }, []);
+  // 1. Get projectId
+  const projectId = "df5473d4465f214096d076007f32ccf7";
+  const chains = [mainnet];
+  const wagmiConfig = defaultWagmiConfig({
+    chains,
+    projectId,
+    metadata: {
+      name: "Html Example",
+      description: "Html Example",
+      url: "https://web3modal.com",
+      icons: ["https://avatars.githubusercontent.com/u/37784886"],
+    },
+  });
+  const modal = createWeb3Modal({
+    wagmiConfig,
+    projectId,
+    showQrModal: true,
+    chains,
+    themeVariables: {
+      "--w3m-color-mix": "#010101",
+      "--w3m-color-mix-strength": 0,
+    },
+  });
+
+  async function connectWallet() {
+    if (document.querySelector(".choose__useapi.active")) {
+      modal.open();
+    }
+  }
 
   return (
     <section className="section choose default-padding">
@@ -117,7 +148,10 @@ const Choose = () => {
         <span className="choose__tag">Solana</span>
       </div>
       <div className="choose__api w-100"></div>
-      <div className="choose__btn w-100 d-flex align-items-center justify-content-center">
+      <div
+        className="choose__btn w-100 d-flex align-items-center justify-content-center"
+        onClick={connectWallet}
+      >
         <img className="choose__btn-icon" src={Iplaceholder} alt="" />
         <p className="choose__btn-font font-base color-white">
           Scan to connect
