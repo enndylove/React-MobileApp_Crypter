@@ -6,9 +6,7 @@ const Created = lazy(() => import("./Created"));
 const ProfileContent = () => {
   let [walletAddress, setWalletAddress] = useState("loading...");
   let [walletBalance, setWalletBalance] = useState();
-  let [walletAvatar, setWalletAvatar] = useState(
-    "https://i.seadn.io/gcs/files/e682d6a6f6e2c46ad24a518b860d3296.png?auto=format&dpr=1&w=1000"
-  );
+  let [walletAvatar, setWalletAvatar] = useState("");
   let [walletStatus, setWalletStatus] = useState("load...");
   let [walletName, setWalletName] = useState("loading...");
   let [walletTagName, setWalletTagName] = useState("loading...");
@@ -121,6 +119,15 @@ const ProfileContent = () => {
     }
   };
 
+  const randomAvatart = [
+    "https://i.seadn.io/gcs/files/e682d6a6f6e2c46ad24a518b860d3296.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/d5c725ebe84f336783c345eb8afee8ab.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/587e816f1e9179a1a52b1b5860f9b041.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/4117ce1382f8589e426b193262f6d4d0.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/655544134798d3f69544847cdfbd4470.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/b4c26b761119253921aacf43a6ea3727.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/e130b0b0bd3ca7f3ef974149e11d74f1.png?auto=format&dpr=1&w=1000",
+  ];
   useEffect(() => {
     let followBtn = document.querySelector(".profile__follow");
     let followBtnSvg = document.querySelector(".profile__follow svg");
@@ -147,6 +154,9 @@ const ProfileContent = () => {
     }
 
     accountLog();
+    let randomNum = Math.floor(Math.random() * randomAvatart.length);
+    setWalletAvatar(randomAvatart[randomNum]);
+
     setWalletAddress(localStorage.getItem("address"));
     setWalletBalance(localStorage.getItem("balance"));
     setWalletName(localStorage.getItem("name"));
