@@ -46,7 +46,11 @@ const ProfileContent = () => {
           "..." +
           response.raw.address.slice(-4)
       );
-      localStorage.setItem("profile_status", resp.raw.status);
+      if (resp.raw.status) {
+        localStorage.setItem("profile_status", resp.raw.status);
+      } else {
+        localStorage.setItem("profile_status", false);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -192,9 +196,18 @@ const ProfileContent = () => {
               {walletName}
               <span
                 className="font-caption color-darken"
-                style={{ fontWeight: 700 }}
+                style={
+                  localStorage.getItem("profile_status") !== "false"
+                    ? { fontWeight: 700 }
+                    : {
+                        fontWeight: 700,
+                        backgroundColor: "#ff001562",
+                      }
+                }
               >
-                {walletStatus}
+                {localStorage.getItem("profile_status") !== "false"
+                  ? walletStatus
+                  : "NO SYNCED"}
               </span>
             </h4>
             <div className="profile__content-wallet d-flex align-items-center flex-wrap">
