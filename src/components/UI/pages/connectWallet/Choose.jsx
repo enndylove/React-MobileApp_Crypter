@@ -44,16 +44,18 @@ let blockapi = apiInfo.map((info) =>
         </div>
     `
 )
+
 const Choose = () => {
     async function isAccount() {
-        const account = await window.ethereum.request({
-            method: 'eth_requestAccounts',
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts"
         });
-        if (account) {
+        if (accounts) {
             window.location = '/profile'
         }
     }
     useEffect(() => {
+        isAccount()
         setTimeout(() => {
             let el = document.querySelector('.choose__api')
             for (let i = 0; i < blockapi.length; i++) {
@@ -100,9 +102,6 @@ const Choose = () => {
             
         }, 20)
     }, []);
-    window.addEventListener('load', () => {
-        isAccount()
-    })
     // 1. Get projectId
     const projectId = 'b8656cc127e4828e503239d9737c6f86'
     const chains = [mainnet]
@@ -110,9 +109,9 @@ const Choose = () => {
         chains,
         projectId,
         metadata: {
-            name: 'Html Example',
-            description: 'Html Example',
-            url: 'https://web3modal.com',
+            name: 'Connect Crypter',
+            description: 'Connect Crypter login walletConnect',
+            url: 'https://localhost:3000/',
             icons: ['https://avatars.githubusercontent.com/u/37784886']
         }
     })
@@ -123,10 +122,6 @@ const Choose = () => {
     })
 
     async function connectWallet() {
-        // const account = await window.ethereum.request({
-        //     method: 'eth_requestAccounts',
-        // })
-        // setWalletAddress(account[0])
         if (document.querySelector('.choose__useapi.active')) {
             modal.open();
         }

@@ -1,0 +1,95 @@
+$darken: #202025;
+$gray: #686A6C;
+$lite-white: #F7FBFA;
+$darken-white: #E1E2E2;
+$purple: #B9A9FB;
+.profile {
+    &__info {
+        left: 0;
+        top: 0;
+        z-index: -1;
+    }
+    &__banner {
+        max-height: 304px;
+        object-fit: cover;
+    }
+    &__content {
+        &-info {
+            padding: 100px 24px 48px;
+            background-color: #fff;
+        }
+        &-name {
+            margin-bottom: 12px;
+        }
+        &-tagname {
+            margin-right: 20px;
+        }
+        &-address {
+            transition: .6s;
+            padding: 8px 12px;
+            background-color: $purple;
+            cursor: pointer;
+            border-radius: 12px;
+            & svg {
+                margin-left: 8px;
+            }
+        }
+    }
+    &__follow {
+        max-width: max-content;
+        padding: 12px 32px;
+        border: 1px solid $darken-white;
+        border-radius: 4px;
+        margin: 32px 0;
+        transition: .5s;
+        &.active {
+            color: $lite-white !important;
+            background-color: $darken;
+            border: 1px solid $darken;
+        }
+    }
+    &__sub {
+        & + & {
+            margin-left: 40px;
+        }
+        &-info {
+            margin-top: 8px;
+            & svg {
+                margin-right: 4px;
+            }
+        }
+    }
+    &__infos {
+        margin-top: 32px;
+        &-title {
+            color: $gray;
+        }
+        &-links {
+            margin-top: 40px;
+        }
+    }
+    &__bio {
+        &-info {
+            margin-top: 24px;
+        }
+        &-links {
+            margin-top: 40px;
+        }
+    }
+    &__links {
+        &-title {
+            margin-bottom: 24px;
+        }
+    }
+    &__avatar {
+        position: absolute;
+        left: 24px;
+        top: calc(100% - 75%);
+        max-width: 160px;
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 12px solid rgba(247, 251, 250, 0.25);
+    }
+}

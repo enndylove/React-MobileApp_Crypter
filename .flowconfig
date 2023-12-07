@@ -1,5 +1,0 @@
-import StyleConnectwallet from "./src/styles/connectWallet.scss"
-import DarkCookie from './src/styles/DarkCookie.scss'
-
-module.file_ext = StyleConnectwallet.scss
-module.file_ext = DarkCookie.scss

@@ -7,11 +7,14 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/ethereum-provider": "^2.10.6",
+    "@web3-react/core": "^8.2.3",
     "@web3modal/ethereum": "^2.7.1",
     "@web3modal/react": "^2.7.1",
     "@web3modal/wagmi": "^3.3.2",
+    "axios": "^1.6.2",
     "babel-preset-react-app": "^10.0.1",
-    "ethers": "^5.7.2",
+    "ethers": "^6.9.0",
     "http": "^0.0.1-security",
     "lazy": "^1.0.11",
     "react": "^18.2.0",
@@ -21,7 +24,9 @@
     "sass": "^1.69.5",
     "viem": "^1.19.3",
     "wagmi": "^1.4.7",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3": "^4.3.0",
+    "web3-providers-http": "^4.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,7 +46,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "react-router-dom": "^6.19.0",
+    "react-router-dom": "^6.20.1",
     "react-scripts": "^4.0.3"
   },
   "engines": {

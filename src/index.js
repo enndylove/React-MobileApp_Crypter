@@ -9,6 +9,7 @@ import './index.css';
 import Preloader from './components/main/Preloader';
 import HomePage from './components/main/pages/Home';
 import ConnectWallet from './components/main/pages/ConnectWallet';
+import Profile from './components/main/pages/Profile';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <Routes>
         <Route
           index
+          exact
           element={
             <Suspense fallback={<Preloader />}>
               <HomePage />
@@ -27,6 +29,14 @@ export default function App() {
           element={
             <Suspense fallback={<Preloader />}>
               <ConnectWallet />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Suspense fallback={<Preloader />}>
+              <Profile />
             </Suspense>
           }
         />

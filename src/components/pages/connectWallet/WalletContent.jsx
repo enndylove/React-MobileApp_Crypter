@@ -3,7 +3,6 @@ import whiteArrow from '../../../image/main/white_arrow.svg';
 
 
 const WalletContent = () => {
-    const walletBack = () => window.history.back()
     return (
         <section className='section wallet default-padding position-relative'>
             <a href="/">
@@ -18,7 +17,7 @@ const WalletContent = () => {
                     Choose how you want to connect. There are several wallet providers.
                 </p>
             </div>
-            <div className="wallet__back" onClick={walletBack}>
+            <div className="wallet__back" onClick={() => window.history.back()}>
 
             </div>
         </section>
