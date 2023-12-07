@@ -54,15 +54,6 @@ const ProfileContent = () => {
     } catch (e) {
       console.error(e);
     }
-
-    // setWalletAddress(account[0]);
-    // const provider = new Web3();
-    // const provider = await ethers.providers.Web3Provider(window.ethereum);
-    // const balance = await provider.getBalance(account[0]);
-    // const balanceInEth = ethers.utils.formatEther(balance);
-    // setWalletBalance(1000 + balanceInEth);
-    // const name;
-    // console.log(name);
   }
   const copyToClipboard = async () => {
     try {
@@ -78,7 +69,6 @@ const ProfileContent = () => {
   };
 
   let [profileFollowers, setProfileFollowers] = useState(0);
-  // eslint-disable-next-line no-unused-vars
   let [profileFollowing, setProfileFollowing] = useState(0);
   let [profileState, setProfileState] = useState(false);
 
@@ -346,15 +336,7 @@ const ProfileContent = () => {
                   bio
                 </span>
                 <p className="profile__bio-info font-caption">{profileInfo}</p>
-                {/* <div className="profile__bio-links">
-
-                                </div> */}
               </div>
-              {/* <div className="profile__infos-links">
-                                <span className="profile__links-title profile__infos-title font-button">
-                                    links
-                                </span>
-                            </div> */}
             </div>
           </div>
         </div>
