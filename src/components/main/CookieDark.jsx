@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const CookieDark = () => {
   useEffect(() => {
-    if (document.cookie === "acceptCookies=accept") {
+    if (getCookie("acceptCookies") === "accept") {
       document.querySelector(".cookie__dark").remove();
     }
   }, []);
@@ -31,11 +31,20 @@ const CookieDark = () => {
     )}; ${expires}; path=/`;
   }
   const acceptCookie = (e) => {
+    // Set the "acceptCookies" cookie to "accept" with a duration of 7 days
     setCookie("acceptCookies", "accept", 7);
+
+    // Get the value of the "acceptCookies" cookie
     const myCookieValue = getCookie("acceptCookies");
     console.log(myCookieValue);
-    if (document.cookie === "acceptCookies=accept") {
-      document.querySelector(".cookie__dark").remove();
+
+    // Check if the "acceptCookies" cookie has the value "accept"
+    if (myCookieValue === "accept") {
+      // Remove the cookie consent element (assuming it has a class of "cookie__dark")
+      const cookieElement = document.querySelector(".cookie__dark");
+      if (cookieElement) {
+        cookieElement.remove();
+      }
     }
   };
 
