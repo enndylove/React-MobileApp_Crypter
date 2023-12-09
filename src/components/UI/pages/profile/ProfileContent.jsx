@@ -4,7 +4,7 @@ import IBanner from "./ProfileImg";
 const Created = lazy(() => import("./Created"));
 
 const ProfileContent = () => {
-  let [walletAddress, setWalletAddress] = useState("loading...");
+  let [walletAddress, setWalletAddress] = useState("");
   let [walletBalance, setWalletBalance] = useState();
   let [walletAvatar, setWalletAvatar] = useState("");
   let [walletStatus, setWalletStatus] = useState("load...");
@@ -12,16 +12,10 @@ const ProfileContent = () => {
   let [walletTagName, setWalletTagName] = useState("loading...");
   let [walletAddressClip, setWalletAddressClip] = useState("loading...");
 
-  const moralisApiKey = process.env.REACT_APP_MORALIS;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function accountLog() {
+    let address = localStorage.getItem("userAddress");
     try {
-      await Moralis.start({
-        apiKey: moralisApiKey,
-      });
-      const account = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      const address = account[0];
       const response = await Moralis.EvmApi.wallets.getWalletActiveChains({
         address: address,
       });
@@ -36,33 +30,33 @@ const ProfileContent = () => {
         address: address,
         chain: response.raw.active_chains[0].chain_id,
       });
-      if (response.raw.address) {
-        localStorage.setItem("connect_api", true);
+      setWalletBalance(balance.raw.balance);
+
+      if (name) {
+        setWalletName(name.raw.name);
+        setWalletTagName("@" + name.raw.name);
       } else {
-        localStorage.setItem("connect_api", false);
+        setWalletName(
+          response.raw.active_chains[0].chain +
+            "_" +
+            response.raw.active_chains[0].chain_id
+        );
+        setWalletTagName(
+          "@" +
+            response.raw.active_chains[0].chain +
+            response.raw.active_chains[0].chain_id
+        );
+        console.error("This wallet don't have name");
       }
-      localStorage.setItem("address", response.raw.address);
-      localStorage.setItem("balance", balance.raw.balance);
-      if (name.raw.name) {
-        localStorage.setItem("name", name.raw.name);
-        localStorage.setItem("tag_name", "@" + name.raw.name);
+      if (resp.raw) {
+        setWalletStatus(resp.raw.status);
       } else {
-        localStorage.setItem("name", "username");
-        localStorage.setItem("tag_name", "@username");
+        setWalletStatus("NO SYNCED");
       }
-      localStorage.setItem(
-        "addressClip",
-        response.raw.address.substring(0, 6) +
-          "..." +
-          response.raw.address.slice(-4)
-      );
-      if (resp.raw.status) {
-        localStorage.setItem("profile_status", resp.raw.status);
-      } else {
-        localStorage.setItem("profile_status", false);
-      }
-    } catch (e) {
-      console.error(e);
+
+      console.log(response.raw, balance.raw, name, resp);
+    } catch (err) {
+      console.error(err);
     }
   }
   const copyToClipboard = async () => {
@@ -85,7 +79,6 @@ const ProfileContent = () => {
   let defaultInfo =
     "We are laying the groundwork for web3 — the next generation of the internet full of limitless possibilities. Join the millions of creators, collectors, and curators who are on this journey.";
   let [profileInfo, setProfileInfo] = useState(defaultInfo);
-
   const followProfile = async () => {
     let followBtn = document.querySelector(".profile__follow");
     let followBtnSvg = document.querySelector(".profile__follow svg");
@@ -123,6 +116,7 @@ const ProfileContent = () => {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const randomAvatart = [
     "https://i.seadn.io/gcs/files/e682d6a6f6e2c46ad24a518b860d3296.png?auto=format&dpr=1&w=1000",
     "https://i.seadn.io/gcs/files/d5c725ebe84f336783c345eb8afee8ab.png?auto=format&dpr=1&w=1000",
@@ -133,6 +127,16 @@ const ProfileContent = () => {
     "https://i.seadn.io/gcs/files/e130b0b0bd3ca7f3ef974149e11d74f1.png?auto=format&dpr=1&w=1000",
   ];
   useEffect(() => {
+    const moralisApiKey = process.env.REACT_APP_MORALIS;
+    Moralis.start({
+      apiKey: moralisApiKey,
+    });
+    accountLog();
+  }, []);
+  useEffect(() => {
+    if (!localStorage.state) {
+      localStorage.state = "false";
+    }
     let followBtn = document.querySelector(".profile__follow");
     let followBtnSvg = document.querySelector(".profile__follow svg");
 
@@ -157,33 +161,25 @@ const ProfileContent = () => {
       if (followBtnSvg) followBtnSvg.remove();
     }
 
-    accountLog();
     let randomNum = Math.floor(Math.random() * randomAvatart.length);
     setWalletAvatar(randomAvatart[randomNum]);
 
-    setWalletAddress(localStorage.getItem("address"));
-    setWalletBalance(localStorage.getItem("balance"));
-    setWalletName(localStorage.getItem("name"));
-    setWalletTagName(localStorage.getItem("tag_name"));
-    setWalletAddressClip(
-      localStorage.getItem("address").substring(0, 6) +
-        "..." +
-        localStorage.getItem("address").slice(-4)
-    );
-    setWalletStatus(localStorage.getItem("profile_status"));
-    if (walletAddress === walletAddressClip) {
+    let address = localStorage.getItem("userAddress");
+    setWalletAddress(address);
+    setWalletAddressClip(address.substring(0, 6) + "..." + address.slice(-4));
+
+    if (walletAddress === localStorage.userAddress) {
       followBtn.textContent = "Settings";
       localStorage.setItem("state", "settings");
       setProfileState("settings");
-      followBtnSvg.remove();
+      if (followBtnSvg) {
+        followBtnSvg.remove();
+      }
       if (followBtn.classList.contains("active")) {
         followBtn.classList.remove("active");
       }
     }
-    if (localStorage.getItem("connect_api") === "false") {
-      window.location = "/connectWallet";
-    }
-  }, []);
+  }, [accountLog, randomAvatart, walletAddress, walletAddressClip]);
 
   return (
     <div
@@ -197,10 +193,11 @@ const ProfileContent = () => {
           <div className="profile__content-content">
             <h4 className="profile__content-name font-h4 color-darken d-flex align-items-center flex-wrap">
               {walletName}
+
               <span
                 className="font-caption color-darken"
                 style={
-                  localStorage.getItem("profile_status") !== "false"
+                  walletStatus !== "NO SYNCED"
                     ? { fontWeight: 700 }
                     : {
                         fontWeight: 700,
@@ -208,9 +205,7 @@ const ProfileContent = () => {
                       }
                 }
               >
-                {localStorage.getItem("profile_status") !== "false"
-                  ? walletStatus
-                  : "NO SYNCED"}
+                {walletStatus}
               </span>
             </h4>
             <div className="profile__content-wallet d-flex align-items-center flex-wrap">
