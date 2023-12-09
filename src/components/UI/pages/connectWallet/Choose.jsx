@@ -1,6 +1,6 @@
 import { lazy, useEffect } from "react";
-import { mainnet } from "@wagmi/core/chains";
-
+import { mainnet } from "viem/chains";
+import { useAccount } from "wagmi";
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi";
 import {
   Imeta,
@@ -10,6 +10,7 @@ import {
   useApiArrow,
   Iplaceholder,
 } from "./ChooseImg";
+
 const CookieDark = lazy(() => import("../../../main/CookieDark"));
 
 let apiInfo = [
@@ -54,16 +55,25 @@ let blockapi = apiInfo.map(
 );
 
 const Choose = () => {
-  async function isAccount() {
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    if (accounts) {
-      window.location = "/profile";
-    }
-  }
+  const {
+    address,
+    isConnected,
+    connector,
+    isConnecting,
+    isDisconnected,
+    isReconnecting,
+    status,
+  } = useAccount();
+  useAccount({
+    onConnect({ address }) {
+      console.log("Connected", { address, connector });
+      localStorage.setItem("userAddress", address);
+    },
+    onDisconnect() {
+      localStorage.userAddress.clear();
+    },
+  });
   useEffect(() => {
-    isAccount();
     setTimeout(() => {
       let el = document.querySelector(".choose__api");
       for (let i = 0; i < blockapi.length; i++) {
@@ -87,15 +97,6 @@ const Choose = () => {
       let tags = document.querySelectorAll(".choose__tag");
       tags.forEach((item) => {
         item.addEventListener("click", () => {
-          // let useApi = document.querySelectorAll(`[data-tag="${item.textContent}"]`)
-          // let allApi = document.querySelectorAll(`[data-tag]`)
-          // if (useApi.length === 0) {
-          //     allApi.forEach(el => {
-          //         el.remove()
-          //     })
-          // } else {
-
-          // }
           let active = document.querySelector(".choose__tag.active");
           if (active) {
             if (!item.classList.contains("active")) {
@@ -109,16 +110,15 @@ const Choose = () => {
       });
     }, 20);
   }, []);
-  // 1. Get projectId
-  const projectId = "df5473d4465f214096d076007f32ccf7";
+  const projectId = process.env.REACT_APP_WALLETCONNECT;
   const chains = [mainnet];
   const wagmiConfig = defaultWagmiConfig({
     chains,
     projectId,
     metadata: {
-      name: "Html Example",
-      description: "Html Example",
-      url: "https://web3modal.com",
+      name: "Connect Crypter",
+      description: "Connect Crypter login walletConnect",
+      url: "https://localhost:3000/",
       icons: ["https://avatars.githubusercontent.com/u/37784886"],
     },
   });
