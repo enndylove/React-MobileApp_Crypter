@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@wagmi/core": "^1.4.8",
     "@web3modal/ethereum": "^2.7.1",
+    "@web3modal/ethers5": "^3.4.0",
     "@web3modal/react": "^2.7.1",
     "@web3modal/wagmi": "^3.4.0",
     "assert": "^2.1.0",
@@ -32,7 +33,7 @@
     "sass": "^1.69.5",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
-    "viem": "^1.19.3",
+    "viem": "^1.19.11",
     "wagmi": "^1.4.8",
     "web-vitals": "^2.1.4",
     "webpack": "^5.89.0"
@@ -67,6 +68,7 @@
   ],
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "ethers": "^6.9.0",
     "react-router-dom": "^6.20.1",
     "react-scripts": "^5.0.1"
   },
