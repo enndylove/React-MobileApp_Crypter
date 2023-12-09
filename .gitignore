@@ -16,7 +16,6 @@
 # misc
 .DS_Store
 .env
-.env.example
 .env.staging
 .env.local
 .env.development.local
