@@ -44,7 +44,7 @@ let blockapi = apiInfo.map(
     `
         <div class="choose__useapi d-flex justify-content-between align-items-center w-100" data-url="${info._api}" data-tag="${info._tag}">
             <div class="d-flex align-items-center">
-                <img src=${info._icon} alt="" class="choose__useapi-img" />
+                <img loading="lazy" data-src=${info._icon} src=${info._icon} alt="" class="choose__useapi-img" />
                 <h6 class="choose__useapi-name font-body2-bold color-white">
                     ${info._name}
                 </h6>                        
