@@ -3,8 +3,12 @@ import { useApiArrow } from "../UI/pages/connectWallet/ChooseImg";
 
 const Header = () => {
   const [isUserRegistered, setIsUserRegistered] = useState(false);
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let address = localStorage.getItem("userAddress");
+    if (address) {
+      setIsUserRegistered(true);
+    }
+  }, []);
   const burgerFunc = (e) => {
     let burder = document.querySelector(".header__burger");
     let nav = document.querySelector(".header__nav");
@@ -155,24 +159,20 @@ const Header = () => {
                 className="nav__arrow"
               />
             </li>
-            {!isUserRegistered ? (
-              <li className="nav__item d-flex align-items-center justify-content-between">
-                <a
-                  href="/connectWallet"
-                  className="nav__link nav__link-btn font-h4"
-                >
-                  ConnectWallet
-                </a>
-                <img
-                  data-src={useApiArrow}
-                  src={useApiArrow}
-                  alt=""
-                  className="nav__arrow"
-                />
-              </li>
-            ) : (
-              ""
-            )}
+            <li className="nav__item d-flex align-items-center justify-content-between">
+              <a
+                href="/connectWallet"
+                className="nav__link nav__link-btn font-h4"
+              >
+                ConnectWallet
+              </a>
+              <img
+                data-src={useApiArrow}
+                src={useApiArrow}
+                alt=""
+                className="nav__arrow"
+              />
+            </li>
           </ul>
           <p className="font-base">Download app</p>
           <div className="w-100">
