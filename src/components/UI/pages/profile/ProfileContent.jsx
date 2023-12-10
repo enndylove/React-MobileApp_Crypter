@@ -15,6 +15,7 @@ const ProfileContent = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function accountLog() {
     let address = localStorage.getItem("userAddress");
+    if (!address) window.location = "/connectWallet";
     try {
       const response = await Moralis.EvmApi.wallets.getWalletActiveChains({
         address: address,
@@ -132,6 +133,8 @@ const ProfileContent = () => {
       apiKey: moralisApiKey,
     });
     accountLog();
+    let randomNum = Math.floor(Math.random() * randomAvatart.length);
+    setWalletAvatar(randomAvatart[randomNum]);
   }, []);
   useEffect(() => {
     if (!localStorage.state) {
@@ -161,9 +164,6 @@ const ProfileContent = () => {
       if (followBtnSvg) followBtnSvg.remove();
     }
 
-    let randomNum = Math.floor(Math.random() * randomAvatart.length);
-    setWalletAvatar(randomAvatart[randomNum]);
-
     let address = localStorage.getItem("userAddress");
     setWalletAddress(address);
     setWalletAddressClip(address.substring(0, 6) + "..." + address.slice(-4));
@@ -187,8 +187,20 @@ const ProfileContent = () => {
       style={{ maxWidth: 470 }}
     >
       <div className="profile__content position-relative w-100">
-        <img src={IBanner} alt="" className="profile__banner w-100 h-100" />
-        <img src={walletAvatar} alt="" className="profile__avatar" />
+        <img
+          loading="lazy"
+          data-src={IBanner}
+          src={IBanner}
+          alt=""
+          className="profile__banner w-100 h-100"
+        />
+        <img
+          loading="lazy"
+          data-src={walletAvatar}
+          src={walletAvatar}
+          alt=""
+          className="profile__avatar"
+        />
         <div className="profile__content-info">
           <div className="profile__content-content">
             <h4 className="profile__content-name font-h4 color-darken d-flex align-items-center flex-wrap">
