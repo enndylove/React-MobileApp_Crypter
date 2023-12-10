@@ -5,11 +5,18 @@ const WalletContent = () => {
   return (
     <section className="section wallet default-padding position-relative">
       <a href="/">
-        <img className="wallet__logo" src={logo} alt="" />
+        <img
+          className="wallet__logo"
+          loading="lazy"
+          data-src={logo}
+          src={logo}
+          alt=""
+        />
       </a>
       <div className="wallet__text-content">
         <h3 className="wallet__title font-h3 color-darken">Connect wallet.</h3>
         <img
+          loading="lazy"
           src={whiteArrow}
           data-src={whiteArrow}
           alt=""
