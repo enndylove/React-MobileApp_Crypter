@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
 import { WagmiConfig, createConfig, configureChains, mainnet } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
-import { useAccount } from 'wagmi';
 
 import './fonts.css';
 import './reset.css';
