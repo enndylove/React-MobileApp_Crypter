@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import "../../../styles/Profile.scss";
 
-const Header = lazy(() => import("../Header"));
+import Header from "../Header";
 
 const ProfileContent = lazy(() =>
   import("../../UI/pages/profile/ProfileContent")
