@@ -1,69 +1,147 @@
-import { useState, useEffect, lazy } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Moralis from "moralis";
 import IBanner from "./ProfileImg";
-const Created = lazy(() => import("./Created"));
+import Created from "./Created";
 
 const ProfileContent = () => {
-  let [walletAddress, setWalletAddress] = useState("");
-  let [walletBalance, setWalletBalance] = useState();
-  let [walletAvatar, setWalletAvatar] = useState("");
-  let [walletStatus, setWalletStatus] = useState("load...");
-  let [walletName, setWalletName] = useState("loading...");
-  let [walletTagName, setWalletTagName] = useState("loading...");
-  let [walletAddressClip, setWalletAddressClip] = useState("loading...");
+  const initialState = {
+    walletAddress: "",
+    walletBalance: undefined,
+    walletAvatar: "",
+    walletStatus: "load...",
+    walletName: "loading...",
+    walletTagName: "loading...",
+    walletAddressClip: "loading...",
+  };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  async function accountLog() {
-    let address = localStorage.getItem("userAddress");
-    if (!address) window.location = "/connectWallet";
-    try {
-      const response = await Moralis.EvmApi.wallets.getWalletActiveChains({
-        address: address,
-      });
-      const balance = await Moralis.EvmApi.balance.getNativeBalance({
-        chain: response.raw.active_chains[0].chain_id,
-        address: address,
-      });
-      const name = await Moralis.EvmApi.resolve.resolveAddress({
-        address: address,
-      });
-      const resp = await Moralis.EvmApi.nft.getWalletNFTs({
-        address: address,
-        chain: response.raw.active_chains[0].chain_id,
-      });
-      setWalletBalance(balance.raw.balance);
+  const [profile, setProfile] = useState(initialState);
+  const [profileFollowers, setProfileFollowers] = useState(0);
+  const [profileFollowing, setProfileFollowing] = useState(0);
+  const [profileState, setProfileState] = useState(false);
 
-      if (name) {
-        setWalletName(name.raw.name);
-        setWalletTagName("@" + name.raw.name);
-      } else {
-        setWalletName(
-          response.raw.active_chains[0].chain +
-            "_" +
-            response.raw.active_chains[0].chain_id
-        );
-        setWalletTagName(
-          "@" +
-            response.raw.active_chains[0].chain +
-            response.raw.active_chains[0].chain_id
-        );
-        console.error("This wallet don't have name");
+  const profileInfoRef = useRef(
+    "We are laying the groundwork for web3 — the next generation of the internet full of limitless possibilities. Join the millions of creators, collectors, and curators who are on this journey."
+  );
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const address = localStorage.getItem("userAddress");
+        if (!address) {
+          window.location = "/connectWallet";
+          return; // Exit early if there is no address
+        }
+
+        const response = await Moralis.EvmApi.wallets.getWalletActiveChains({
+          address: address,
+        });
+        const balance = await Moralis.EvmApi.balance.getNativeBalance({
+          chain: response.raw.active_chains[0]?.chain_id,
+          address: address,
+        });
+        const name = await Moralis.EvmApi.resolve.resolveAddress({
+          address: address,
+        });
+        const resp = await Moralis.EvmApi.nft.getWalletNFTs({
+          address: address,
+          chain: response.raw.active_chains[0]?.chain_id,
+        });
+
+        const walletName =
+          name?.raw?.name ||
+          `${response.raw.active_chains[0]?.chain}_${response.raw.active_chains[0]?.chain_id}`;
+        const walletTagName = `@${
+          name?.raw?.name ||
+          response.raw.active_chains[0]?.chain +
+            response.raw.active_chains[0]?.chain_id
+        }`;
+
+        setProfile((prevProfile) => ({
+          ...prevProfile,
+          walletAddress: address,
+          walletBalance: balance.raw?.balance,
+          walletName,
+          walletTagName,
+          walletStatus: resp.raw ? resp.raw.status : "NO SYNCED",
+          walletAddressClip: `${address.substring(0, 6)}...${address.slice(
+            -4
+          )}`,
+        }));
+
+        console.log(response.raw, balance.raw, name, resp);
+      } catch (error) {
+        console.error(error);
       }
-      if (resp.raw) {
-        setWalletStatus(resp.raw.status);
-      } else {
-        setWalletStatus("NO SYNCED");
-      }
+    };
 
-      console.log(response.raw, balance.raw, name, resp);
-    } catch (err) {
-      console.error(err);
+    fetchProfileData();
+  }, []);
+
+  useEffect(() => {
+    const followBtn = document.querySelector(".profile__follow");
+    const followBtnSvg = document.querySelector(".profile__follow svg");
+
+    const followState = localStorage.getItem("state");
+    if (followState) setProfileState(followState);
+
+    switch (followState) {
+      case "true":
+        followBtn.classList.add("active");
+        followBtn.textContent = "following";
+        if (followBtnSvg) followBtnSvg.remove();
+        break;
+      case "false":
+        followBtn.textContent = "follow";
+        if (followBtn.classList.contains("active")) {
+          followBtn.classList.remove("active");
+        }
+        break;
+      case "settings":
+        followBtn.textContent = "settings";
+        setProfileState("settings");
+        if (followBtnSvg) followBtnSvg.remove();
+        break;
+      default:
+        break;
     }
-  }
+
+    const initialValue = localStorage.getItem("count");
+    if (initialValue) setProfileFollowers(Number(initialValue));
+
+    const randomAvatars = [
+      "https://i.seadn.io/gcs/files/e682d6a6f6e2c46ad24a518b860d3296.png?auto=format&dpr=1&w=1000",
+      "https://i.seadn.io/gcs/files/d5c725ebe84f336783c345eb8afee8ab.png?auto=format&dpr=1&w=1000",
+      "https://i.seadn.io/gcs/files/587e816f1e9179a1a52b1b5860f9b041.png?auto=format&dpr=1&w=1000",
+      "https://i.seadn.io/gcs/files/4117ce1382f8589e426b193262f6d4d0.png?auto=format&dpr=1&w=1000",
+      "https://i.seadn.io/gcs/files/655544134798d3f69544847cdfbd4470.png?auto=format&dpr=1&w=1000",
+      "https://i.seadn.io/gcs/files/b4c26b761119253921aacf43a6ea3727.png?auto=format&dpr=1&w=1000",
+      "https://i.seadn.io/gcs/files/e130b0b0bd3ca7f3ef974149e11d74f1.png?auto=format&dpr=1&w=1000",
+    ];
+    const randomNum = Math.floor(Math.random() * randomAvatars.length);
+    const selectedAvatar = randomAvatars[randomNum];
+    const address = localStorage.getItem("userAddress");
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      walletAddress: address,
+      walletAddressClip: `${address.substring(0, 6)}...${address.slice(-4)}`,
+      walletAvatar: selectedAvatar,
+    }));
+
+    if (profile.walletAddress === localStorage.userAddress) {
+      followBtn.textContent = "Settings";
+      localStorage.setItem("state", "settings");
+      setProfileState("settings");
+      if (followBtnSvg) followBtnSvg.remove();
+      if (followBtn.classList.contains("active")) {
+        followBtn.classList.remove("active");
+      }
+    }
+  }, [profile.walletAddress]);
+
   const copyToClipboard = async () => {
     try {
       let clipboard = document.querySelector(".profile__content-address");
-      await navigator.clipboard.writeText(walletAddress);
+      await navigator.clipboard.writeText(profile.walletAddress);
       clipboard.style.backgroundColor = "#00ffbf";
       setTimeout(() => {
         clipboard.style.backgroundColor = "";
@@ -73,113 +151,52 @@ const ProfileContent = () => {
     }
   };
 
-  let [profileFollowers, setProfileFollowers] = useState(0);
-  let [profileFollowing, setProfileFollowing] = useState(0);
-  let [profileState, setProfileState] = useState(false);
+  const followProfile = () => {
+    const followBtn = document.querySelector(".profile__follow");
+    const followBtnSvg = document.querySelector(".profile__follow svg");
 
-  let defaultInfo =
-    "We are laying the groundwork for web3 — the next generation of the internet full of limitless possibilities. Join the millions of creators, collectors, and curators who are on this journey.";
-  let [profileInfo, setProfileInfo] = useState(defaultInfo);
-  const followProfile = async () => {
-    let followBtn = document.querySelector(".profile__follow");
-    let followBtnSvg = document.querySelector(".profile__follow svg");
-    if (localStorage.state === "false") {
-      if (followBtnSvg) {
-        followBtnSvg.remove();
-      }
-      setProfileFollowers((prevCount) => {
-        const newCount = Number(prevCount) + 1;
-        localStorage.setItem("count", newCount);
-        return newCount;
-      });
-      followBtn.classList.add("active");
-      followBtn.textContent = "following";
-      setProfileState(() => {
-        localStorage.setItem("state", true);
-        return setProfileState(true);
-      });
-    }
-    if (localStorage.state === "true") {
-      followBtn.classList.remove("active");
-      followBtn.textContent = "follow";
-      setProfileFollowers((prevCount) => {
-        const newCount = Number(prevCount) - 1;
-        localStorage.setItem("count", newCount);
-        return newCount;
-      });
-      setProfileState(() => {
-        localStorage.setItem("state", false);
-        return setProfileState(false);
-      });
-    }
-    if (localStorage.state === "settings") {
-      document.location = "/profile/settings";
+    switch (localStorage.state) {
+      case "false":
+        if (followBtnSvg) {
+          followBtnSvg.remove();
+        }
+
+        setProfileFollowers((prevCount) => {
+          const newCount = Number(prevCount) + 1;
+          localStorage.setItem("count", newCount);
+          return newCount;
+        });
+
+        followBtn.classList.add("active");
+        followBtn.textContent = "following";
+
+        setProfileState(() => {
+          localStorage.setItem("state", true);
+          return true;
+        });
+        break;
+      case "true":
+        followBtn.classList.remove("active");
+        followBtn.textContent = "follow";
+
+        setProfileFollowers((prevCount) => {
+          const newCount = Number(prevCount) - 1;
+          localStorage.setItem("count", newCount);
+          return newCount;
+        });
+
+        setProfileState(() => {
+          localStorage.setItem("state", false);
+          return false;
+        });
+        break;
+      case "settings":
+        document.location = "/profile/settings";
+        break;
+      default:
+        break;
     }
   };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const randomAvatart = [
-    "https://i.seadn.io/gcs/files/e682d6a6f6e2c46ad24a518b860d3296.png?auto=format&dpr=1&w=1000",
-    "https://i.seadn.io/gcs/files/d5c725ebe84f336783c345eb8afee8ab.png?auto=format&dpr=1&w=1000",
-    "https://i.seadn.io/gcs/files/587e816f1e9179a1a52b1b5860f9b041.png?auto=format&dpr=1&w=1000",
-    "https://i.seadn.io/gcs/files/4117ce1382f8589e426b193262f6d4d0.png?auto=format&dpr=1&w=1000",
-    "https://i.seadn.io/gcs/files/655544134798d3f69544847cdfbd4470.png?auto=format&dpr=1&w=1000",
-    "https://i.seadn.io/gcs/files/b4c26b761119253921aacf43a6ea3727.png?auto=format&dpr=1&w=1000",
-    "https://i.seadn.io/gcs/files/e130b0b0bd3ca7f3ef974149e11d74f1.png?auto=format&dpr=1&w=1000",
-  ];
-  useEffect(() => {
-    const moralisApiKey = process.env.REACT_APP_MORALIS;
-    Moralis.start({
-      apiKey: moralisApiKey,
-    });
-    accountLog();
-    let randomNum = Math.floor(Math.random() * randomAvatart.length);
-    setWalletAvatar(randomAvatart[randomNum]);
-  }, []);
-  useEffect(() => {
-    if (!localStorage.state) {
-      localStorage.state = "false";
-    }
-    let followBtn = document.querySelector(".profile__follow");
-    let followBtnSvg = document.querySelector(".profile__follow svg");
-
-    let initialValue = localStorage.getItem("count");
-    if (initialValue) setProfileFollowers(initialValue);
-
-    let followState = localStorage.getItem("state");
-    if (followState) setProfileState(followState);
-
-    if (followState === "true") {
-      followBtn.classList.add("active");
-      followBtn.textContent = "following";
-      if (followBtnSvg) followBtnSvg.remove();
-    } else if (followState === "false") {
-      followBtn.textContent = "follow";
-      if (followBtn.classList.contains("active")) {
-        followBtn.classList.remove("active");
-      }
-    } else if (followState === "settings") {
-      followBtn.textContent = "settings";
-      setProfileState("settings");
-      if (followBtnSvg) followBtnSvg.remove();
-    }
-
-    let address = localStorage.getItem("userAddress");
-    setWalletAddress(address);
-    setWalletAddressClip(address.substring(0, 6) + "..." + address.slice(-4));
-
-    if (walletAddress === localStorage.userAddress) {
-      followBtn.textContent = "Settings";
-      localStorage.setItem("state", "settings");
-      setProfileState("settings");
-      if (followBtnSvg) {
-        followBtnSvg.remove();
-      }
-      if (followBtn.classList.contains("active")) {
-        followBtn.classList.remove("active");
-      }
-    }
-  }, [accountLog, randomAvatart, walletAddress, walletAddressClip]);
 
   return (
     <div
@@ -196,20 +213,20 @@ const ProfileContent = () => {
         />
         <img
           loading="lazy"
-          data-src={walletAvatar}
-          src={walletAvatar}
+          data-src={profile.walletAvatar}
+          src={profile.walletAvatar}
           alt=""
           className="profile__avatar"
         />
         <div className="profile__content-info">
           <div className="profile__content-content">
             <h4 className="profile__content-name font-h4 color-darken d-flex align-items-center flex-wrap">
-              {walletName}
+              {profile.walletName}
 
               <span
                 className="font-caption color-darken"
                 style={
-                  walletStatus !== "NO SYNCED"
+                  profile.walletStatus !== "NO SYNCED"
                     ? { fontWeight: 700 }
                     : {
                         fontWeight: 700,
@@ -217,18 +234,18 @@ const ProfileContent = () => {
                       }
                 }
               >
-                {walletStatus}
+                {profile.walletStatus}
               </span>
             </h4>
             <div className="profile__content-wallet d-flex align-items-center flex-wrap">
               <p className="profile__content-tagname font-body2-bold">
-                {walletTagName}
+                {profile.walletTagName}
               </p>
               <div
                 className="profile__content-address pointer font-base color-darken"
                 onClick={copyToClipboard}
               >
-                {walletAddressClip}
+                {profile.walletAddressClip}
                 <svg
                   width="20"
                   height="20"
@@ -355,7 +372,9 @@ const ProfileContent = () => {
                 <span className="profile__bio-title profile__infos-title font-button">
                   bio
                 </span>
-                <p className="profile__bio-info font-caption">{profileInfo}</p>
+                <p className="profile__bio-info font-caption">
+                  {profileInfoRef.current}
+                </p>
               </div>
             </div>
           </div>
