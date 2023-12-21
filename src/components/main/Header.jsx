@@ -1,13 +1,104 @@
 import { useState, useEffect } from "react";
 import { useApiArrow } from "../UI/pages/connectWallet/ChooseImg";
+import Moralis from "moralis";
+import "../../styles/Header+.scss";
 
 const Header = () => {
-  const [isUserRegistered, setIsUserRegistered] = useState(false);
+  const [isUserRegistered, setisUserRegistered] = useState(false);
+  const initialState = {
+    walletAddress: "",
+    walletBalance: undefined,
+    walletUSDTBalance: undefined,
+    walletAvatar: "",
+    walletName: "loading...",
+    walletTagName: "loading...",
+    walletAddressClip: "loading...",
+  };
+  const [profile, setProfile] = useState(initialState);
+  const fetchProfileData = async () => {
+    try {
+      const address = localStorage.getItem("userAddress");
+      if (!address) {
+        window.location = "/connectWallet";
+        return;
+      } else {
+        setisUserRegistered(true);
+      }
+
+      const response = await Moralis.EvmApi.wallets.getWalletActiveChains({
+        address: address,
+      });
+      const balance = await Moralis.EvmApi.balance.getNativeBalance({
+        chain: response.raw.active_chains[0]?.chain_id,
+        address: address,
+      });
+      const name = await Moralis.EvmApi.resolve.resolveAddress({
+        address: address,
+      });
+      const resp = await Moralis.EvmApi.nft.getWalletNFTs({
+        address: address,
+        chain: response.raw.active_chains[0]?.chain_id,
+      });
+      const formattedBalance = parseFloat(balance.raw.balance) / 10 ** 18;
+      const walletName =
+        name?.raw?.name ||
+        `${response.raw.active_chains[0]?.chain}_${response.raw.active_chains[0]?.chain_id}`;
+      const walletTagName = `@${
+        name?.raw?.name ||
+        response.raw.active_chains[0]?.chain +
+          response.raw.active_chains[0]?.chain_id
+      }`;
+
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        walletAddress: address,
+        walletBalance: formattedBalance.toFixed(2),
+        walletUSDTBalance: (formattedBalance.toFixed(2) * 2229).toFixed(2),
+        walletName,
+        walletTagName,
+        walletAddressClip: `${address.substring(0, 6)}...${address.slice(-4)}`,
+      }));
+
+      console.log(response.raw, balance.raw, name, resp);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const randomAvatars = [
+    "https://i.seadn.io/gcs/files/e682d6a6f6e2c46ad24a518b860d3296.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/d5c725ebe84f336783c345eb8afee8ab.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/587e816f1e9179a1a52b1b5860f9b041.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/4117ce1382f8589e426b193262f6d4d0.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/655544134798d3f69544847cdfbd4470.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/b4c26b761119253921aacf43a6ea3727.png?auto=format&dpr=1&w=1000",
+    "https://i.seadn.io/gcs/files/e130b0b0bd3ca7f3ef974149e11d74f1.png?auto=format&dpr=1&w=1000",
+  ];
   useEffect(() => {
+    const startMoralis = async () => {
+      try {
+        const moralisApiKey = process.env.REACT_APP_MORALIS;
+        await Moralis.start({
+          apiKey: moralisApiKey,
+        });
+        fetchProfileData();
+        console.log("Moralis started successfully");
+      } catch (error) {
+        console.error("Moralis is started:");
+      }
+    };
+    startMoralis();
     let address = localStorage.getItem("userAddress");
     if (address) {
-      setIsUserRegistered(true);
+      setisUserRegistered(true);
     }
+    const randomNum = Math.floor(Math.random() * randomAvatars.length);
+    const selectedAvatar = randomAvatars[randomNum];
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      walletAddress: address,
+      walletAddressClip: `${address.substring(0, 6)}...${address.slice(-4)}`,
+      walletAvatar: selectedAvatar,
+    }));
   }, []);
   const burgerFunc = (e) => {
     let burder = document.querySelector(".header__burger");
@@ -28,6 +119,27 @@ const Header = () => {
         item.classList.add("animated");
       });
     }
+  };
+
+  function profileWidget() {
+    let element = document.querySelector(".header__profile"),
+      bg = document.querySelector(".header__profile-background");
+    element.classList.add("active");
+    bg.classList.add("active");
+  }
+  function profileClose() {
+    let element = document.querySelector(".header__profile"),
+      bg = document.querySelector(".header__profile-background");
+    if (
+      element.classList.contains("active") &&
+      bg.classList.contains("active")
+    ) {
+      element.classList.remove("active");
+      bg.classList.remove("active");
+    }
+  }
+  const disconnectApi = async () => {
+    window.location = "/connectWallet";
   };
 
   return (
@@ -54,7 +166,7 @@ const Header = () => {
           </svg>
         </a>
         {isUserRegistered ? (
-          <div className="header__create bled-mode">
+          <div className="header__create header__widget bled-mode">
             <svg
               width="24"
               height="24"
@@ -82,7 +194,7 @@ const Header = () => {
           ""
         )}
         {isUserRegistered ? (
-          <div className="header__flash">
+          <div className="header__flash header__widget">
             <svg
               width="24"
               height="24"
@@ -99,6 +211,164 @@ const Header = () => {
               />
             </svg>
           </div>
+        ) : (
+          ""
+        )}
+        {isUserRegistered ? (
+          <>
+            <div
+              className="header__profile header__widget"
+              onClick={profileWidget}
+            >
+              <img
+                className="header__profile-avatar"
+                src={profile.walletAvatar}
+                alt="Avatar"
+              />
+            </div>
+            <div className="header__profile-background position-fixed">
+              <div
+                className="header__profile-close d-flex align-items-center"
+                onClick={profileClose}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M6 18L18 6"
+                    stroke="#F7FBFA"
+                    strokeWidth="2"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M18 18L6 6"
+                    stroke="#F7FBFA"
+                    strokeWidth="2"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <div className="header__profile-content d-flex justify-content-between flex-column">
+                <div className="">
+                  <div className="header__profile-person d-flex align-items-center">
+                    <img
+                      className="header__profile-person-avatar"
+                      src={profile.walletAvatar}
+                      alt=""
+                    />
+                    <div className="">
+                      <h4 className="header__profile-person-name font-body1 color-white">
+                        {profile.walletName}
+                      </h4>
+                      <p className="header__profile-person-tagname font-base">
+                        {profile.walletTagName}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="header__profile-disconnect d-flex align-items-center justify-content-between">
+                    <p className="font-base">Connecting Wallet</p>
+                    <p
+                      onClick={disconnectApi}
+                      className="disconnect font-base color-white d-flex align-items-center"
+                    >
+                      <span style={{ marginRight: 12 }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M9.75 14.25L14.25 9.75M14.25 14.25L9.75 9.75"
+                            stroke="#686A6C"
+                            strokeWidth="1.5"
+                            strokeMiterlimit="10"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M21 12.5294C21 19 19 21 12 21C5 21 3 19 3 12C3 5 5 3 12 3C19 3 21 5 21 12.5294Z"
+                            stroke="#686A6C"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      Disconnect
+                    </p>
+                  </div>
+                  <div className="header__profile-wallet">
+                    <div className="header__profile-wallet-address d-flex align-items-center">
+                      <h4 className="font-base color-white">
+                        {profile.walletAddressClip}
+                      </h4>
+                      <span></span>
+                    </div>
+                    <div className="header__profile-count d-flex align-items-center justify-content-between">
+                      <div className="header__profile-wallet-eth font-body1 color-white">
+                        {profile.walletBalance} ETH
+                      </div>
+                      <div className="header__profile-wallet-usdt font-body1">
+                        ${profile.walletUSDTBalance}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="">
+                  <li className="nav__item d-flex active align-items-center justify-content-between">
+                    <a href="/profile" className="nav__link font-body1 fw-800">
+                      My profile
+                    </a>
+                    <img
+                      data-src={useApiArrow}
+                      src={useApiArrow}
+                      alt=""
+                      className="nav__arrow"
+                    />
+                  </li>
+                  <li className="nav__item d-flex align-items-center justify-content-between">
+                    <a
+                      href="/profile/settings"
+                      className="nav__link font-body1 fw-800"
+                    >
+                      Settings
+                    </a>
+                    <img
+                      data-src={useApiArrow}
+                      src={useApiArrow}
+                      alt=""
+                      className="nav__arrow"
+                    />
+                  </li>
+                  <li className="nav__item d-flex align-items-center justify-content-between">
+                    <a
+                      href="/profile/settings"
+                      className="nav__link font-body1 fw-800"
+                    >
+                      Help
+                    </a>
+                    <img
+                      data-src={useApiArrow}
+                      src={useApiArrow}
+                      alt=""
+                      className="nav__arrow"
+                    />
+                  </li>
+                </div>
+              </div>
+            </div>
+          </>
         ) : (
           ""
         )}
