@@ -55,15 +55,7 @@ let blockapi = apiInfo.map(
 );
 
 const Choose = () => {
-  const {
-    address,
-    isConnected,
-    connector,
-    isConnecting,
-    isDisconnected,
-    isReconnecting,
-    status,
-  } = useAccount();
+  const { connector } = useAccount();
   useAccount({
     onConnect({ address }) {
       console.log("Connected", { address, connector });
