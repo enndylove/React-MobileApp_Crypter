@@ -104,7 +104,6 @@ const Header = () => {
     let burder = document.querySelector(".header__burger");
     let nav = document.querySelector(".header__nav");
     let navItem = document.querySelectorAll(".nav__item");
-    let body = document.getElementsByTagName("body");
     if (burder.classList.contains("active")) {
       burder.classList.remove("active");
       nav.classList.remove("active");
