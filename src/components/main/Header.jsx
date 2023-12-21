@@ -104,6 +104,7 @@ const Header = () => {
     let burder = document.querySelector(".header__burger");
     let nav = document.querySelector(".header__nav");
     let navItem = document.querySelectorAll(".nav__item");
+    let body = document.getElementsByTagName("body");
     if (burder.classList.contains("active")) {
       burder.classList.remove("active");
       nav.classList.remove("active");
@@ -372,7 +373,7 @@ const Header = () => {
         ) : (
           ""
         )}
-        <nav className="header__nav position-absolute">
+        <nav className="header__nav">
           <ul className="header__ul d-flex flex-column">
             <li className="nav__item active d-flex align-items-center justify-content-between">
               <a href="#" className="nav__link font-h4">

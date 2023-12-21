@@ -206,12 +206,15 @@ a:hover {
   opacity: .7;
 }
 .header__nav {
+  position: fixed !important;
+  left: 0;
+  top: 0;
   transform: translateX(-200%);
   opacity: 0;
   transition: .5s;
   padding: 20px;
-  width: 100%;
-  height: fit-content;
+  width: 0;
+  height: 100%;
   overflow-y: auto !important;
   text-align: left !important;
   background-color: var(--black);
@@ -221,12 +224,12 @@ a:hover {
   opacity: 1;
   right: 0;
   top: 0;
+  width: 100%;
   z-index: 90;
 }
 .header__ul {
   overflow-y: auto;
   margin: 48px 0;
-  height: 100%;
 }
 .header__create {
   padding: 4px;
