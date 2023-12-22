@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import Moralis from "moralis";
 import IBanner from "./ProfileImg";
 import Created from "./Created";
 
@@ -24,57 +23,38 @@ const ProfileContent = () => {
   );
 
   useEffect(() => {
-    const fetchProfileData = async () => {
+    const fetchProfileDataFromServer = async () => {
       try {
-        const address = localStorage.getItem("userAddress");
-        if (!address) {
-          window.location = "/connectWallet";
-          return; // Exit early if there is no address
+        const response = await fetch("/api/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
 
-        const response = await Moralis.EvmApi.wallets.getWalletActiveChains({
-          address: address,
-        });
-        const balance = await Moralis.EvmApi.balance.getNativeBalance({
-          chain: response.raw.active_chains[0]?.chain_id,
-          address: address,
-        });
-        const name = await Moralis.EvmApi.resolve.resolveAddress({
-          address: address,
-        });
-        const resp = await Moralis.EvmApi.nft.getWalletNFTs({
-          address: address,
-          chain: response.raw.active_chains[0]?.chain_id,
-        });
-
-        const walletName =
-          name?.raw?.name ||
-          `${response.raw.active_chains[0]?.chain}_${response.raw.active_chains[0]?.chain_id}`;
-        const walletTagName = `@${
-          name?.raw?.name ||
-          response.raw.active_chains[0]?.chain +
-            response.raw.active_chains[0]?.chain_id
-        }`;
+        const profileData = await response.json();
 
         setProfile((prevProfile) => ({
           ...prevProfile,
-          walletAddress: address,
-          walletBalance: balance.raw?.balance,
-          walletName,
-          walletTagName,
-          walletStatus: resp.raw ? resp.raw.status : "NO SYNCED",
-          walletAddressClip: `${address.substring(0, 6)}...${address.slice(
-            -4
-          )}`,
+          walletAddress: profileData.walletAddress,
+          walletBalance: profileData.walletBalance,
+          walletName: profileData.walletName,
+          walletUSDTBalance: profileData.walletUSDTBalance,
+          walletTagName: profileData.walletTagName,
+          walletStatus: profileData.walletStatus,
+          walletAddressClip: profileData.walletAddressClip,
         }));
 
-        console.log(response.raw, balance.raw, name, resp);
+        console.log("Profile Data from Server:", profileData);
       } catch (error) {
-        console.error(error);
+        console.error("Profile Data error:", error);
       }
     };
-
-    fetchProfileData();
+    fetchProfileDataFromServer();
   }, []);
 
   useEffect(() => {

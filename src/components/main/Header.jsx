@@ -10,6 +10,7 @@ const Header = () => {
     walletBalance: undefined,
     walletUSDTBalance: undefined,
     walletAvatar: "",
+    walletStatus: "",
     walletName: "loading...",
     walletTagName: "loading...",
     walletAddressClip: "loading...",
@@ -25,11 +26,12 @@ const Header = () => {
         setisUserRegistered(true);
       }
 
-      const response = await Moralis.EvmApi.wallets.getWalletActiveChains({
-        address: address,
-      });
+      const responseAddress =
+        await Moralis.EvmApi.wallets.getWalletActiveChains({
+          address: address,
+        });
       const balance = await Moralis.EvmApi.balance.getNativeBalance({
-        chain: response.raw.active_chains[0]?.chain_id,
+        chain: responseAddress.raw.active_chains[0]?.chain_id,
         address: address,
       });
       const name = await Moralis.EvmApi.resolve.resolveAddress({
@@ -37,16 +39,16 @@ const Header = () => {
       });
       const resp = await Moralis.EvmApi.nft.getWalletNFTs({
         address: address,
-        chain: response.raw.active_chains[0]?.chain_id,
+        chain: responseAddress.raw.active_chains[0]?.chain_id,
       });
       const formattedBalance = parseFloat(balance.raw.balance) / 10 ** 18;
       const walletName =
         name?.raw?.name ||
-        `${response.raw.active_chains[0]?.chain}_${response.raw.active_chains[0]?.chain_id}`;
+        `${responseAddress.raw.active_chains[0]?.chain}_${responseAddress.raw.active_chains[0]?.chain_id}`;
       const walletTagName = `@${
         name?.raw?.name ||
-        response.raw.active_chains[0]?.chain +
-          response.raw.active_chains[0]?.chain_id
+        responseAddress.raw.active_chains[0]?.chain +
+          responseAddress.raw.active_chains[0]?.chain_id
       }`;
 
       setProfile((prevProfile) => ({
@@ -56,12 +58,33 @@ const Header = () => {
         walletUSDTBalance: (formattedBalance.toFixed(2) * 2229).toFixed(2),
         walletName,
         walletTagName,
+        walletStatus: resp.raw ? resp.raw.status : "NO SYNCED",
         walletAddressClip: `${address.substring(0, 6)}...${address.slice(-4)}`,
       }));
 
-      console.log(response.raw, balance.raw, name, resp);
+      const response = await fetch("/api/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          walletAddress: address,
+          walletBalance: formattedBalance.toFixed(2),
+          walletUSDTBalance: (formattedBalance.toFixed(2) * 2229).toFixed(2),
+          walletName,
+          walletTagName,
+          walletStatus: resp.raw ? resp.raw.status : "NO SYNCED",
+          walletAddressClip: `${address.substring(0, 6)}...${address.slice(
+            -4
+          )}`,
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log("Server response:", responseData);
+      console.log(responseAddress, balance.raw, name, resp);
     } catch (error) {
-      console.error(error);
+      console.error("Header data resp", error);
     }
   };
   const randomAvatars = [
