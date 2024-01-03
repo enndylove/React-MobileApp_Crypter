@@ -1,0 +1,171 @@
+:root {
+  --black: #010101;
+  --darken: #202025;
+  --darken-gray: #555555;
+  --gray: #686A6C;
+  --ligth-gray: #A6AEAD;
+  --darken-white: #E1E2E2;
+  --white: #F1F4F4;
+  --lite-white: #F7FBFA;
+  --gradient: conic-gradient(from 180deg at 50% 50%, #FFE249 22.225085645914078deg, #F35950 78.13612282276154deg, #7C5BFF 158.9999771118164deg, #1CE4FF 202.3224377632141deg, #5FFF5C 341.3397216796875deg);
+  --accent1: #BCE6EC;
+  --accent4: #DBFF73;
+  --shade1: #6DD3C2;
+  --purple: #B9A9FB;
+  --blue: #1966F7;
+  --pink: #FFA6D6;
+}
+
+.wallet {
+  background-color: var(--accent1);
+}
+.wallet__logo {
+  width: 168px;
+  height: -moz-max-content;
+  height: max-content;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.wallet__arrow {
+  width: 148px;
+  height: -moz-max-content;
+  height: max-content;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.wallet__text-content {
+  margin-top: 40px;
+}
+.wallet__title {
+  margin-bottom: 24px;
+}
+.wallet__info {
+  margin-top: 24px;
+}
+.wallet__back {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--darken);
+  transition: 0.5s;
+}
+.wallet__back::after, .wallet__back::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 2px;
+  background-color: var(--darken);
+}
+.wallet__back::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.wallet__back::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.wallet__back:hover {
+  opacity: 0.5;
+}
+
+.choose {
+  background-color: var(--black);
+}
+.choose__title {
+  margin-bottom: 32px;
+}
+.choose__tags::-webkit-scrollbar {
+  width: 0;
+}
+.choose__btn {
+  cursor: pointer;
+  transition: 0.5s;
+  margin-bottom: 40px;
+}
+.choose__btn:hover {
+  opacity: 0.6;
+}
+.choose__btn-icon {
+  width: 24px;
+  height: 24px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin-right: 16px;
+}
+.choose__tag {
+  color: var(--gray);
+  padding: 16px 32px;
+}
+.choose__tag.active {
+  color: var(--lite-white);
+  border-bottom: 1px solid #fff;
+}
+.choose__api {
+  margin: 32px 0 40px;
+}
+.choose__useapi {
+  position: relative;
+  cursor: pointer;
+  padding: 20px 32px;
+  border-radius: 12px;
+  border: 2px solid var(--neutral-07, #202025);
+}
+.choose__useapi + .choose__useapi {
+  margin-top: 20px;
+}
+.choose__useapi-arrow {
+  width: 24px;
+  height: 24px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: 0.2s;
+  opacity: 0;
+  z-index: 2;
+}
+.choose__useapi.active {
+  transition: 0.5s;
+}
+.choose__useapi.active .choose__useapi-arrow {
+  opacity: 1;
+}
+.choose__useapi.active::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  border-radius: 12px;
+  padding: 2px;
+  transition: 1s;
+  background-image: conic-gradient(from 180deg at 50% 50%, #FFE249 22.2250856459deg, #F35950 78.1361228228deg, #7C5BFF 158.9999771118deg, #1CE4FF 202.3224377632deg, #5FFF5C 341.3397216797deg);
+  background-position: 0% 50%;
+}
+.choose__useapi.active::after {
+  content: "";
+  position: absolute;
+  width: 99%;
+  height: 96%;
+  right: 0.5%;
+  z-index: 1;
+  border: 5px solid var(--black);
+  border-radius: 12px;
+  background-color: var(--darken);
+}
+.choose__useapi-img {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 2;
+}
+.choose__useapi-name {
+  z-index: 2;
+  margin-left: 20px;
+}/*# sourceMappingURL=connectWallet.css.map */

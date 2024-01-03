@@ -1,0 +1,44 @@
+.created__main {
+  background-color: #010101;
+}
+.created__tag {
+  cursor: pointer;
+  padding: 28px 24px;
+}
+.created__tags {
+  overflow: auto !important;
+}
+.created__tag.active {
+  border-bottom: 1px solid #FFE249;
+  color: #fff;
+}
+.created__tag span {
+  margin-left: 8px;
+  border-radius: 8px;
+  padding: 2px 8px;
+  color: #010101 !important;
+}
+.created__tag span.green {
+  background-color: #DBFF73;
+}
+.created__tag span.purple {
+  background-color: #B9A9FB;
+}
+.created__tag span.pink {
+  background-color: #FFA6D6;
+}
+.created__blocks {
+  display: none;
+}
+.created__blocks.active {
+  display: block;
+}
+.created__block-name, .created__block-desc {
+  margin-bottom: 4px;
+}
+.created__block-img {
+  border-radius: 20px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20px;
+}/*# sourceMappingURL=Created.css.map */
