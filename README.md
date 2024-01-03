@@ -29,17 +29,20 @@
 - for train
   ```
   npm start
-  react-scripts start
+  OR
+  npm react-scripts start
   ```
 - for test
   ```
   npm test
-  react-scripts test
+  OR
+  npm react-scripts test
   ```
 - for build
   ```
   npm build
-  react-scripts build
+  OR
+  npm react-scripts build
   ```
 
 ## Directory Hierarchy
@@ -102,7 +105,7 @@
 - software
 
   ```
-  OS: Windows
+  OS: Windows 11
 
   Versions:
   Babel-preset-react-app: ^10.0.1
