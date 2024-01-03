@@ -1,15 +1,10 @@
 // webpack.config.js
-
-newFunction(),
 function newFunction() {
-    resolve: {
-        fallback: {
-            stream: require.resolve('stream-browserify');
-            path: require.resolve('path-browserify');
-            os: require.resolve('os-browserify/browser');
-            crypto: require.resolve('crypto-browserify');
-            assert: require.resolve('assert/');
-        }
-    }
+    require.resolve('stream-browserify');
+    require.resolve('path-browserify');
+    require.resolve('os-browserify/browser');
+    require.resolve('crypto-browserify');
+    require.resolve('assert/');
 }
+newFunction()
 
