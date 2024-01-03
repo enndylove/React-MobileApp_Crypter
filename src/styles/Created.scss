@@ -1,6 +1,84 @@
 $darken: #010101;
+$white: #fff;
+
+$green: #DBFF73;
+$purple: #B9A9FB;
+$pink: #FFA6D6;
+
 .created {
     &__main {
         background-color: $darken;
     }
+    &__tag {
+        &s {
+            overflow: auto !important;
+        }
+        &.active {
+            border-bottom: 1px solid #FFE249;
+            color: $white;
+        }
+        cursor: pointer;
+        padding: 28px 24px;
+        & span {
+            margin-left: 8px;
+            border-radius: 8px;
+            padding: 2px 8px;
+            color: $darken !important;
+            &.green {
+                background-color: $green;
+            }
+            &.purple {
+                background-color: $purple;
+            }
+            &.pink {
+                background-color: $pink;
+            }
+        }
+
+    }
+    &__empty {
+        padding: 100px 0;
+        &-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
+    &__block {
+        margin-top: 40px;
+        &s{
+            display: none;
+            &.active {
+                display: block;
+            }            
+        }
+        &-name{
+            margin-bottom: 4px;
+        }
+        &-img {
+            border-radius: 20px;
+            width: 327px;
+            height: 327px;
+            object-fit: cover;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        &-symbol {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            border-radius: 12px;
+            padding: 8px 16px;
+            background-color: rgba(32, 32, 37, 0.75);
+            &-img {
+                width: 40px;
+                height: 40px;
+                border-radius: 8px;
+                overflow: hidden;
+                object-fit: cover;
+                margin-right: 16px;
+            }
+        }
+    }
+
 }
