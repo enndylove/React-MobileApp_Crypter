@@ -42,6 +42,66 @@ app.get('/api/profile', async (req, res) => {
   }
 });
 
+app.post('/owned/profile', async (req, res) => {
+  try {
+    const nftsData = req.body;
+    console.log('Received profile data:', nftsData);
+
+    await fs.mkdir(path.join(__dirname, 'data'), { recursive: true });
+
+    const filePath = path.join(__dirname, 'data', 'ownedData.json');
+    await fs.writeFile(filePath, JSON.stringify(nftsData, null, 2));
+
+    res.json({ status: 'success' });
+  } catch (error) {
+    console.error('Error in /nfts/profile:', error);
+    res.status(500).json({ status: 'error' });
+  }
+});
+
+app.get('/owned/profile', async (req, res) => {
+  try {
+    const filePath = path.join(__dirname, 'data', 'ownedData.json');
+    const data = await fs.readFile(filePath, 'utf8');
+    const nftsData = JSON.parse(data);
+
+    res.json(nftsData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: 'error' });
+  }
+});
+
+app.post('/collections/profile', async (req, res) => {
+  try {
+    const nftsData = req.body;
+    console.log('Received profile data:', nftsData);
+
+    await fs.mkdir(path.join(__dirname, 'data'), { recursive: true });
+
+    const filePath = path.join(__dirname, 'data', 'collectionsData.json');
+    await fs.writeFile(filePath, JSON.stringify(nftsData, null, 2));
+
+    res.json({ status: 'success' });
+  } catch (error) {
+    console.error('Error in /nfts/profile:', error);
+    res.status(500).json({ status: 'error' });
+  }
+});
+
+app.get('/collections/profile', async (req, res) => {
+  try {
+    const filePath = path.join(__dirname, 'data', 'collectionsData.json');
+    const data = await fs.readFile(filePath, 'utf8');
+    const nftsData = JSON.parse(data);
+
+    res.json(nftsData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: 'error' });
+  }
+});
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
