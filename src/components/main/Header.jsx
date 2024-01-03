@@ -62,27 +62,62 @@ const Header = () => {
         walletAddressClip: `${address.substring(0, 6)}...${address.slice(-4)}`,
       }));
 
-      const response = await fetch("/api/profile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          walletAddress: address,
-          walletBalance: formattedBalance.toFixed(2),
-          walletUSDTBalance: (formattedBalance.toFixed(2) * 2229).toFixed(2),
-          walletName,
-          walletTagName,
-          walletStatus: resp.raw ? resp.raw.status : "NO SYNCED",
-          walletAddressClip: `${address.substring(0, 6)}...${address.slice(
-            -4
-          )}`,
-        }),
+      const owners = await Moralis.EvmApi.nft.getNFTOwners({
+        address: address,
+        chain: responseAddress.raw.active_chains[0]?.chain_id,
       });
 
-      const responseData = await response.json();
-      console.log("Server response:", responseData);
-      console.log(responseAddress, balance.raw, name, resp);
+      const collections = await Moralis.EvmApi.nft.getWalletNFTCollections({
+        address: address,
+        chain: responseAddress.raw.active_chains[0]?.chain_id,
+      });
+      let collectionsJson = collections.jsonResponse.result;
+      let ownedJson = owners.raw.result;
+
+      if (ownedJson.length > 0) {
+        let ownedData = [];
+        await ownedJson.map(async (owned) => {
+          try {
+            let ownedMetadata = JSON.parse(owned.metadata);
+            ownedData.push({
+              name: ownedMetadata.name,
+              image: ownedMetadata.image,
+            });
+            console.log("All owned completed");
+          } catch (error) {
+            console.error("Error making request or parsing JSON:", error);
+          }
+        });
+        await fetch("/owned/profile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ownedNFT: ownedData,
+          }),
+        });
+      }
+      if (collectionsJson.length > 0) {
+        let collectionsData = [];
+        await collectionsJson.map(async (collection) => {
+          try {
+            collectionsData.push(collection);
+            console.log("All collection completed");
+          } catch (error) {
+            console.error("Error making request or parsing JSON:", error);
+          }
+        });
+        await fetch("/collections/profile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            collectionsNFT: collectionsData,
+          }),
+        });
+      }
     } catch (error) {
       console.error("Header data resp", error);
     }
