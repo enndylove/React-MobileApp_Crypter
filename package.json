@@ -72,6 +72,7 @@
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
     "source-map-loader": "^3.0.0",
+    "sqlite3": "^5.1.7-rc.0",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",

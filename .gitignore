@@ -3,11 +3,13 @@
 # dependencies
 /node_modules
 /build
-/data
 /.pnp
 .pnp.js
 .vscode
-.env
+
+# data | databases
+/data/*.json
+*.db
 
 # testing
 /coverage
