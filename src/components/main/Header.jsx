@@ -50,9 +50,7 @@ const Header = () => {
         responseAddress.raw.active_chains[0]?.chain +
           responseAddress.raw.active_chains[0]?.chain_id
       }`;
-
-      setProfile((prevProfile) => ({
-        ...prevProfile,
+      let profileData = {
         walletAddress: address,
         walletBalance: formattedBalance.toFixed(2),
         walletUSDTBalance: (formattedBalance.toFixed(2) * 2229).toFixed(2),
@@ -60,7 +58,25 @@ const Header = () => {
         walletTagName,
         walletStatus: resp.raw ? resp.raw.status : "NO SYNCED",
         walletAddressClip: `${address.substring(0, 6)}...${address.slice(-4)}`,
+      };
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        walletAddress: profileData.walletAddress,
+        walletBalance: profileData.walletBalance,
+        walletUSDTBalance: profileData.walletUSDTBalance,
+        walletName,
+        walletTagName,
+        walletStatus: profileData.walletStatus,
+        walletAddressClip: profileData.walletAddressClip,
       }));
+
+      await fetch("/api/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profileData),
+      });
 
       const owners = await Moralis.EvmApi.nft.getNFTOwners({
         address: address,
