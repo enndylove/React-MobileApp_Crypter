@@ -115,7 +115,7 @@ const StackSlide = () => {
     let stackProgressbar = document.querySelector(".stack__progressbar span");
     stackProgressbar.style.width = stackSlider.clientWidth / 100 + "em";
     stackProgressbar.style.marginLeft = 0 + "%";
-    stackNextBtn.addEventListener("click", (e) => {
+    stackNextBtn.addEventListener("click", () => {
       stackActiveBlock = document.querySelector(".stack__slide-block.active");
       if (stackBlock[stackBlock.length - 1].classList.contains("active")) {
         stackNextBtn.classList.add("deactive");
@@ -139,7 +139,7 @@ const StackSlide = () => {
         }
       }
     });
-    stackPrevBtn.addEventListener("click", (e) => {
+    stackPrevBtn.addEventListener("click", () => {
       stackActiveBlock = document.querySelector(".stack__slide-block.active");
       if (stackBlock[0].classList.contains("active")) {
         stackPrevBtn.classList.add("deactive");

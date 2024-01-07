@@ -31,6 +31,7 @@ const CookieDark = () => {
     )}; ${expires}; path=/`;
   }
   const acceptCookie = (e) => {
+    e.preventDefault()
     // Set the "acceptCookies" cookie to "accept" with a duration of 7 days
     setCookie("acceptCookies", "accept", 7);
 

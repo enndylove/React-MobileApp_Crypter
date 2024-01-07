@@ -30,6 +30,7 @@ const Cookie = () => {
   }
 
   const acceptCookie = (e) => {
+    e.preventDefault();
     setCookie("acceptCookies", "accept", 7);
     const myCookieValue = getCookie("acceptCookies");
     console.log(myCookieValue);

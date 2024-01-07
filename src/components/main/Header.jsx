@@ -174,7 +174,7 @@ const Header = () => {
       walletAvatar: selectedAvatar,
     }));
   }, []);
-  const burgerFunc = (e) => {
+  const burgerFunc = () => {
     let burder = document.querySelector(".header__burger");
     let nav = document.querySelector(".header__nav");
     let navItem = document.querySelectorAll(".nav__item");

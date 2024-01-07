@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Animated } from "react-animated-css";
 import ImageNft1 from "../../../../image/pages/home/bionft/bionft1.webp";
 import ImageNft2 from "../../../../image/pages/home/bionft/bionft2.webp";
 import ImageNft3 from "../../../../image/pages/home/bionft/bionft3.webp";
