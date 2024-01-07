@@ -34,8 +34,6 @@
     "css-minimizer-webpack-plugin": "^3.2.0",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
-    "eslint": "^8.3.0",
-    "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^3.1.1",
     "express": "^4.18.2",
     "file-loader": "^6.2.0",
@@ -101,7 +99,8 @@
     "start": "node server.js",
     "client": "node scripts/start.js",
     "server": "node server.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -116,8 +115,13 @@
   ],
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "eslint": "^8.56.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.6.1",
+    "eslint-plugin-react": "^7.33.2",
     "ethers": "^6.9.0",
-    "react-router-dom": "^6.20.1"
+    "react-router-dom": "^6.21.1"
   },
   "engines": {
     "node": "v16.13.1",
