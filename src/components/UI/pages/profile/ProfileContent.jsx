@@ -23,6 +23,8 @@ const ProfileContent = () => {
   );
 
   useEffect(() => {
+    setProfileFollowing()
+    profileState()
     const fetchProfileDataFromServer = async () => {
       try {
         const response = await fetch("/api/profile", {
