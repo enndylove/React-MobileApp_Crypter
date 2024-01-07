@@ -27,16 +27,68 @@ const Created = () => {
       });
     });
   };
+  function blocksEmpty() {
+    let createdBlock = document.querySelectorAll(".created__created-block"),
+      collectionBlock = document.querySelectorAll(
+        ".created__collection-block"
+      ),
+      ownedBlock = document.querySelectorAll(".created__owned-block"),
+      createdBlocks = document.querySelector(".created__blocks-created"),
+      ownedBlocks = document.querySelector(".created__blocks-owned"),
+      collectionBlocks = document.querySelector(
+        ".created__blocks-collection"
+      );
+    
+    if (createdBlock.length === 0) {
+      createdBlocks.innerHTML = `
+    
+    <div class="created__empty d-flex flex-column w-100 justify-content-center align-items-center">
+      <h5 class="font-body1 color-white" style="text-align: center">
+        You have no created nft
+      </h5>
+      <p class="created__empty-link font-caption">
+        To create your own nft, follow the
+        <a class='' href='#'>link</a>
+      </p>
+    </div>
 
+    `;
+    } else {
+      setLCreated(createdBlock.length);
+    }
+    if (collectionBlock.length === 0) {
+      collectionBlocks.innerHTML = `
+    <div class="created__empty d-flex flex-column w-100 justify-content-center align-items-center">
+      <h5 class="font-body1 color-white" style="text-align: center">
+        You have no collectible NFTs
+      </h5>
+      <p class="created__empty-link font-caption">
+        Collect NFTs to display in collections or reload page
+      </p>
+    </div>
+    `;
+    } else {
+      setLCollection(collectionBlock.length);
+    }
+
+    if (ownedBlock.length === 0) {
+      ownedBlocks.innerHTML = `
+    <div class="created__empty d-flex flex-column w-100 justify-content-center align-items-center">
+      <h5 class="font-body1 color-white" style="text-align: center">
+        You do not own any NFTs
+      </h5>
+      <p class="created__empty-link font-caption">
+        create your own NFTs to display here or reload page
+      </p>
+    </div>
+    `;
+    } else {
+      setLOwned(ownedBlock.length);
+    }
+  }
   useEffect(() => {
     const fetchProfileDataFromServer = async () => {
-      let createdBlock = document.querySelectorAll(".created__created-block"),
-        collectionBlock = document.querySelectorAll(
-          ".created__collection-block"
-        ),
-        ownedBlock = document.querySelectorAll(".created__owned-block"),
-        createdBlocks = document.querySelector(".created__blocks-created"),
-        ownedBlocks = document.querySelector(".created__blocks-owned"),
+      let ownedBlocks = document.querySelector(".created__blocks-owned"),
         collectionBlocks = document.querySelector(
           ".created__blocks-collection"
         );
@@ -54,54 +106,6 @@ const Created = () => {
             "Content-Type": "application/json",
           },
         });
-        function blocksEmpty() {
-          if (createdBlock.length === 0) {
-            createdBlocks.innerHTML = `
-          
-          <div class="created__empty d-flex flex-column w-100 justify-content-center align-items-center">
-            <h5 class="font-body1 color-white" style="text-align: center">
-              You have no created nft
-            </h5>
-            <p class="created__empty-link font-caption">
-              To create your own nft, follow the
-              <a class='' href='#'>link</a>
-            </p>
-          </div>
-
-          `;
-          } else {
-            setLCreated(createdBlock.length);
-          }
-          if (collectionBlock.length === 0) {
-            collectionBlocks.innerHTML = `
-          <div class="created__empty d-flex flex-column w-100 justify-content-center align-items-center">
-            <h5 class="font-body1 color-white" style="text-align: center">
-              You have no collectible NFTs
-            </h5>
-            <p class="created__empty-link font-caption">
-              Collect NFTs to display in collections or reload page
-            </p>
-          </div>
-          `;
-          } else {
-            setLCollection(collectionBlock.length);
-          }
-
-          if (ownedBlock.length === 0) {
-            ownedBlocks.innerHTML = `
-          <div class="created__empty d-flex flex-column w-100 justify-content-center align-items-center">
-            <h5 class="font-body1 color-white" style="text-align: center">
-              You do not own any NFTs
-            </h5>
-            <p class="created__empty-link font-caption">
-              create your own NFTs to display here or reload page
-            </p>
-          </div>
-          `;
-          } else {
-            setLOwned(ownedBlock.length);
-          }
-        }
         if (!responseOwned.ok || !responseCollection.ok) {
           blocksEmpty();
           throw new Error("Network response was not ok");
