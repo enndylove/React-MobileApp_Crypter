@@ -20,7 +20,7 @@ const Spotlight = () => {
           animationInDuration={1200}
         >
           <p className="spotlight__text-info font-body1">
-            Projects you'll love
+            Projects you{'\''}ll love
           </p>
         </Animated>
         <div className="spotlight__tag-block d-flex w-100 flex-nowrap overflow-auto">
