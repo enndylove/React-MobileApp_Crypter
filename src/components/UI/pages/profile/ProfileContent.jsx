@@ -23,8 +23,7 @@ const ProfileContent = () => {
   );
 
   useEffect(() => {
-    setProfileFollowing()
-    profileState()
+    setProfileFollowing, profileState;
     const fetchProfileDataFromServer = async () => {
       try {
         const response = await fetch("/api/profile", {
@@ -64,7 +63,7 @@ const ProfileContent = () => {
     const followBtnSvg = document.querySelector(".profile__follow svg");
 
     const followState = localStorage.getItem("state");
-    if (followState) setProfileState(followState);
+    followState ? setProfileState(followState) : setProfileState(0);
 
     switch (followState) {
       case "true":
