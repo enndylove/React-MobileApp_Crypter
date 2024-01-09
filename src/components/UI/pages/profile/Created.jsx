@@ -117,59 +117,67 @@ const Created = () => {
           "Collection Data from Server:",
           collectionData.collectionsNFT
         );
-        let ownedSetBlocks = ownedData?.ownedNFT.map(
-          (data) =>
-            `
-          <div class="created__block created__owned-block">
-            <img loading="lazy" class="created__block-img" data-src="${data.image}" src="${data.image}" alt="" />
-            <h5 class="creader__block-name font-body1 color-white">${data.name}</h5>
-            <a href="#" class="created__block-link font-caption fw-800">
-              Buy now
-            </a>
-          </div>
-        `
-        );
-        if (ownedData) ownedBlocks.innerHTML += ownedSetBlocks;
+        if (ownedData.ownedNFT === undefined || Object.keys(ownedData).length === 0) {
+            console.error('ownedData empty')
+        } else {
+          let ownedSetBlocks = ownedData?.ownedNFT.map(
+            (data) =>
+              `
+            <div class="created__block created__owned-block">
+              <img loading="lazy" class="created__block-img" data-src="${data.image}" src="${data.image}" alt="" />
+              <h5 class="creader__block-name font-body1 color-white">${data.name}</h5>
+              <a href="#" class="created__block-link font-caption fw-800">
+                Buy now
+              </a>
+            </div>
+          `
+          );
+          if (ownedData) ownedBlocks.innerHTML += ownedSetBlocks;          
+        }
 
-        let collectionSetBlocks = collectionData?.collectionsNFT.map(
-          (data) =>
-            `
-        <div class="created__block created__collection-block">
-          <div class="created__block-img-wrap position-relative">
-            <img loading="lazy" class="created__block-img" data-src="${
-              data?.image ||
-              "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
-            }" src="${
-              data?.image ||
-              "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
-            }" alt="" style="margin-bottom: 32px" />
-            <div class="created__block-symbol d-flex align-items-center">
-              <img loading="lazy" data-src="${
+        if (collectionData.collectionsNFT === undefined || Object.keys(collectionData).length === 0) {
+          console.error('collectionData empty')
+        } else {
+          let collectionSetBlocks = collectionData?.collectionsNFT.map(
+            (data) =>
+              `
+          <div class="created__block created__collection-block">
+            <div class="created__block-img-wrap position-relative">
+              <img loading="lazy" class="created__block-img" data-src="${
                 data?.image ||
                 "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
               }" src="${
-              data?.image ||
-              "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
-            }" alt="" class="created__block-symbol-img" />
-              <span class="font-title color-white">${data.symbol}</span>
+                data?.image ||
+                "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
+              }" alt="" style="margin-bottom: 32px" />
+              <div class="created__block-symbol d-flex align-items-center">
+                <img loading="lazy" data-src="${
+                  data?.image ||
+                  "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
+                }" src="${
+                data?.image ||
+                "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
+              }" alt="" class="created__block-symbol-img" />
+                <span class="font-title color-white">${data.symbol}</span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap">
+              <h5 class="created__block-name font-body1 color-white">${
+                data.name
+              }</h5>  
+              <div class="d-flex align-items-center">
+                <span class="font-caption fw-800">Floor:</span>
+                <p class="created__block-amount font-base color-white">${
+                  data?.amount || "1.00"
+                } ETH</p>
+              </div>
             </div>
           </div>
-          <div class="d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="created__block-name font-body1 color-white">${
-              data.name
-            }</h5>  
-            <div class="d-flex align-items-center">
-              <span class="font-caption fw-800">Floor:</span>
-              <p class="created__block-amount font-base color-white">${
-                data?.amount || "1.00"
-              } ETH</p>
-            </div>
-          </div>
-        </div>
 
-        `
-        );
-        if (collectionData) collectionBlocks.innerHTML += collectionSetBlocks;
+          `
+          );
+          if (collectionData) collectionBlocks.innerHTML += collectionSetBlocks;
+        }
         blocksEmpty();
       } catch (error) {
         console.error("Profile Data error:", error);
