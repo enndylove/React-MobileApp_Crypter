@@ -123,10 +123,6 @@
     "ethers": "^6.9.0",
     "react-router-dom": "^6.21.1"
   },
-  "engines": {
-    "node": "v16.13.1",
-    "npm": "8.1.2"
-  },
   "browser": {
     "fs": false,
     "os": false,
