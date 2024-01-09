@@ -1,29 +1,35 @@
 $black: #010101;
+
 .header {
     &__profile {
         max-width: 36px;
         max-height: 36px;
         border-radius: 50%;
         overflow: hidden;
+
         &-avatar {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
+
         &-wallet {
             border-radius: 16px;
             padding: 16px;
             background-color: #202025bf;
+
             &-address {
                 & h4 {
                     margin-right: 12px;
                 }
+
                 & span {
                     width: 16px;
                     height: 16px;
                     background-color: #DBFF73;
                     border-radius: 50%;
                 }
+
                 max-width: max-content;
                 margin-bottom: 15px;
                 border-radius: 12px;
@@ -31,13 +37,17 @@ $black: #010101;
                 background-color: #55555540;
             }
         }
+
         &-disconnect {
+            cursor: pointer;
             margin-bottom: 20px;
         }
+
         &-person {
             padding-bottom: 24px;
             margin-bottom: 24px;
             border-bottom: 1px solid #202025;
+
             &-avatar {
                 width: 72px;
                 height: 72px;
@@ -45,9 +55,11 @@ $black: #010101;
                 border-radius: 50%;
                 margin-right: 16px;
             }
+
             &-name {
                 margin: 0;
             }
+
             &-tagname {
                 margin: 0;
             }
@@ -66,6 +78,7 @@ $black: #010101;
             border: 2px solid #555;
             margin-bottom: 30px;
         }
+
         &-content {
             max-width: 343px;
             width: 100%;
@@ -76,12 +89,13 @@ $black: #010101;
             margin: 0 auto;
             overflow: auto;
         }
-        &-background{
+
+        &-background {
             height: 0;
             opacity: 0;
             z-index: -10000;
             transition: .5s;
-            
+
             &.active {
                 position: fixed;
                 top: 0;
@@ -92,13 +106,15 @@ $black: #010101;
                 background: rgba(32, 32, 32, 0.95);
                 backdrop-filter: blur(16px);
                 z-index: 10000;
-            }            
+            }
         }
 
-        
+
     }
+
     &__widget {
         margin-left: 13px;
+
         &:last-of-type {
             margin-right: 13px;
         }
