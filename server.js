@@ -36,69 +36,73 @@ app.get('/api/profile', async (req, res) => {
     const filePath = path.join(__dirname, 'data', 'profileData.json');
     const data = await fs.readFile(filePath, 'utf8');
     const profileData = data ? JSON.parse(data) : {};
-    const db = new sqlite3.Database(usersDBPath);
-    db.run(`
-      CREATE TABLE IF NOT EXISTS user (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        address TEXT,
-        addressClip TEXT,
-        balance TEXT,
-        name TEXT,
-        status TEXT,
-        tagname TEXT,
-        usdtbalance TEXT
-      )
-    `);
 
-    const existingData = await new Promise((resolve, reject) => {
-      db.get('SELECT * FROM user WHERE address = ?', [profileData.walletAddress], (err, row) => {
-        if (err) reject(err);
-        resolve(row);
+    if (Object.keys(profileData).length !== 0) {
+      const db = new sqlite3.Database(usersDBPath);
+
+      db.run(`
+        CREATE TABLE IF NOT EXISTS user (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          address TEXT,
+          addressClip TEXT,
+          balance TEXT,
+          name TEXT,
+          status TEXT,
+          tagname TEXT,
+          usdtbalance TEXT
+        )
+      `);
+
+      const existingData = await new Promise((resolve, reject) => {
+        db.get('SELECT * FROM user WHERE address = ?', [profileData.walletAddress], (err, row) => {
+          if (err) reject(err);
+          resolve(row);
+        });
       });
-    });
-    if (existingData) {
-      const stmt = db.prepare(`
-        UPDATE user
-        SET balance = ?,
-            name = ?,
-            status = ?,
-            tagname = ?,
-            usdtbalance = ?
-        WHERE address = ?
-      `);
-      stmt.run(
-        profileData.walletBalance,
-        profileData.walletName,
-        profileData.walletStatus,
-        profileData.walletTagName,
-        profileData.walletUSDTBalance,
-        profileData.walletAddress
-      );
-      stmt.finalize();
-    } else {
-      const stmt = db.prepare(`
-        INSERT INTO user (address, addressClip, balance, name, status, tagname, usdtbalance)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-      `);
-      stmt.run(
-        profileData.walletAddress,
-        profileData.walletAddressClip,
-        profileData.walletBalance,
-        profileData.walletName,
-        profileData.walletStatus,
-        profileData.walletTagName,
-        profileData.walletUSDTBalance
-      );
-      stmt.finalize();
+
+      if (existingData) {
+        db.run(`
+          UPDATE user
+          SET balance = ?,
+              name = ?,
+              status = ?,
+              tagname = ?,
+              usdtbalance = ?
+          WHERE address = ?
+        `, [
+          profileData.walletBalance,
+          profileData.walletName,
+          profileData.walletStatus,
+          profileData.walletTagName,
+          profileData.walletUSDTBalance,
+          profileData.walletAddress
+        ]);
+      } else {
+        db.run(`
+          INSERT INTO user (address, addressClip, balance, name, status, tagname, usdtbalance)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+        `, [
+          profileData.walletAddress,
+          profileData.walletAddressClip,
+          profileData.walletBalance,
+          profileData.walletName,
+          profileData.walletStatus,
+          profileData.walletTagName,
+          profileData.walletUSDTBalance
+        ]);
+      }
+
+      db.close();
     }
-    db.close();
+
     res.json(profileData);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ status: 'error' });
+    res.status(500).json({ status: 'error', message: error.message });
   }
 });
 
+const nftsDBPath = path.join(__dirname, 'data', 'database', 'nfts.db');
 app.post('/owned/profile', async (req, res) => {
   try {
     const nftsData = req.body;
@@ -119,13 +123,59 @@ app.post('/owned/profile', async (req, res) => {
 app.get('/owned/profile', async (req, res) => {
   try {
     const filePath = path.join(__dirname, 'data', 'ownedData.json');
-    const data = await fs.readFile(filePath, 'utf8');
-    const nftsData = JSON.parse(data);
+    const profileFilePath = path.join(__dirname, 'data', 'profileData.json');
 
-    res.json(nftsData);
+    const data = await fs.readFile(filePath, 'utf8');
+    const profileReadData = await fs.readFile(profileFilePath, 'utf8');
+
+    const ownedData = data ? JSON.parse(data) : [];
+    const profileData = profileReadData ? JSON.parse(profileReadData) : {};
+
+    if (Object.keys(ownedData).length !== 0) {
+      const db = new sqlite3.Database(nftsDBPath);
+
+      db.run(`
+        CREATE TABLE IF NOT EXISTS owned (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          address TEXT,
+          image TEXT,
+          name TEXT,
+          description TEXT
+        )
+      `);
+
+      for (const data of ownedData) {
+        const existingData = await new Promise((resolve, reject) => {
+          db.get(
+            'SELECT * FROM owned WHERE address = ? AND image = ? AND name = ? AND description = ?',
+            [profileData.walletAddress, data.image, data.name, data.description],
+            (err, row) => {
+              if (err) reject(err);
+              resolve(row);
+            }
+          );
+        });
+
+        if (!existingData) {
+          db.run(`
+            INSERT INTO owned (address, image, name, description)
+            VALUES (?, ?, ?)
+          `, [
+            profileData.walletAddress,
+            data?.image,
+            data.name,
+            data.description,
+          ]);
+        }
+      }
+
+      db.close();
+    }
+
+    res.json(ownedData);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ status: 'error' });
+    res.status(500).json({ status: 'error', message: error.message });
   }
 });
 
@@ -149,10 +199,73 @@ app.post('/collections/profile', async (req, res) => {
 app.get('/collections/profile', async (req, res) => {
   try {
     const filePath = path.join(__dirname, 'data', 'collectionsData.json');
-    const data = await fs.readFile(filePath, 'utf8');
-    const nftsData = JSON.parse(data);
+    const profileFilePath = path.join(__dirname, 'data', 'profileData.json');
 
-    res.json(nftsData);
+    const data = await fs.readFile(filePath, 'utf8');
+    const profileReadData = await fs.readFile(profileFilePath, 'utf8');
+
+    const collectionsData = data ? JSON.parse(data) : [];
+    const profileData = profileReadData ? JSON.parse(profileReadData) : {};
+
+
+    if (Object.keys(collectionsData).length !== 0) {
+      const db = new sqlite3.Database(nftsDBPath);
+
+      db.run(`
+        CREATE TABLE IF NOT EXISTS collections (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          address TEXT,
+          image TEXT,
+          symbol TEXT,
+          name TEXT,
+          amount TEXT
+        )
+      `);
+
+      for (const data of collectionsData) {
+        const existingData = await new Promise((resolve, reject) => {
+          db.get(
+            'SELECT * FROM collections WHERE address = ? AND symbol = ? AND name = ?',
+            [profileData.walletAddress, data.symbol, data.name],
+            (err, row) => {
+              if (err) reject(err);
+              resolve(row);
+            }
+          );
+        });
+
+        if (existingData) {
+          db.run(`
+            UPDATE collections
+            SET image = ?,
+                amount = ?
+            WHERE address = ? AND symbol = ? AND name = ?
+          `, [
+            data?.image || "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png",
+            data?.amount || "1.00",
+            profileData.walletAddress,
+            data.symbol,
+            data.name
+          ]);
+        } else {
+          db.run(`
+            INSERT INTO collections (address, image, symbol, name, amount)
+            VALUES (?, ?, ?, ?, ?)
+          `, [
+            profileData.walletAddress,
+            data?.image,
+            data.symbol,
+            data.name,
+            data?.amount || "1.00"
+          ]);
+        }
+      }
+
+      db.close();
+    }
+
+
+    res.json(collectionsData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ status: 'error' });
