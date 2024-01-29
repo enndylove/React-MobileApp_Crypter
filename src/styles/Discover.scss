@@ -1,0 +1,123 @@
+$black: #010101;
+$white: #F7FBFA;
+
+.discover {
+  &__slider {
+    height: 779px;
+
+    &-slider {
+      min-width: 100%;
+      transition: .3s;
+    }
+
+    &-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+
+      &s {
+        right: 0;
+        top: 0;
+        padding: 24px;
+        z-index: 1;
+      }
+
+      &.disabled {
+        opacity: .4;
+      }
+
+      &-prev {
+        background-color: $white;
+
+        & svg path {
+          fill: $black;
+        }
+      }
+
+      &-next {
+        background-color: $black;
+
+        & svg path {
+          fill: $white;
+        }
+      }
+
+      &+& {
+        margin-left: 12px;
+      }
+    }
+
+    &-content {
+      padding: 24px;
+      left: 0;
+      bottom: 0;
+
+      &-block {
+        &+& {
+          margin-top: 40px;
+        }
+
+        &.buttons {
+          max-width: 324px;
+          width: 100%;
+        }
+      }
+
+      &-autor {
+        padding: 12px;
+        border-radius: 12px;
+        background-color: $black;
+        margin-top: 12px;
+        max-width: max-content;
+
+        & img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          margin-right: 16px;
+          border-radius: 8px;
+        }
+      }
+
+      &-btn {
+        width: 150px;
+        border-radius: 4px;
+        border: 2px solid $white;
+        padding: 20px 0;
+        color: $white !important;
+        transition: .5s;
+
+        &+& {
+          margin-left: 8px;
+        }
+
+        & svg {
+          margin-left: 12px;
+
+          & path {
+            transition: .5s;
+          }
+        }
+
+        &.fill,
+        &:hover {
+          background-color: $white !important;
+          color: $black !important;
+
+          & svg path {
+            fill: $black !important;
+          }
+
+        }
+      }
+    }
+
+    &-block {
+      min-width: 100%;
+
+      &-image {
+        object-fit: cover;
+      }
+    }
+  }
+}
