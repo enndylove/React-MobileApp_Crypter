@@ -13,6 +13,8 @@ import Preloader from './components/main/Preloader';
 import HomePage from './components/main/pages/Home';
 import ConnectWallet from './components/main/pages/ConnectWallet';
 import Profile from './components/main/pages/Profile';
+import Discover from './components/main/pages/Discover';
+import Settings from './components/main/pages/Settings';
 
 const { publicClient, webSocketPublicClient } = configureChains(
   [mainnet],
@@ -51,6 +53,22 @@ export default function App() {
             element={
               <Suspense fallback={<Preloader />}>
                 <Profile />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/discover"
+            element={
+              <Suspense fallback={<Preloader />}>
+                <Discover />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/profile/settings"
+            element={
+              <Suspense fallback={<Preloader />}>
+                <Settings />
               </Suspense>
             }
           />
