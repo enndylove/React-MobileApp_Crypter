@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const LazyLoad = () => {
+export default function LazyLoad() {
   useEffect(() => {
     const images = document.querySelectorAll("img");
 
@@ -30,6 +30,4 @@ const LazyLoad = () => {
       observer.disconnect();
     };
   }, []);
-};
-
-export default LazyLoad;
+}
