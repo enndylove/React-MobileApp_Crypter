@@ -1,0 +1,253 @@
+$white: #F7FBFA;
+$lite-white: #F1F4F4;
+$darken-white: #E1E2E2;
+$lite-grey: #A6AEAD;
+$darken: #202025;
+
+$blue: #1966F7;
+$lime: #9DC628;
+
+.content {
+  padding: 40px 12px;
+  background-color: $lite-white;
+
+  &__menu {
+    margin-top: 32px;
+
+    &-link {
+      padding: 24px 12px;
+      border-radius: 12px;
+      opacity: .6;
+      transition: .5s;
+
+      & svg {
+        margin-left: 10px;
+      }
+
+      &:hover {
+        opacity: 1;
+        box-shadow: 0px 12px 40px -16px rgba(0, 0, 0, 0.05);
+        background-color: $white;
+      }
+    }
+  }
+
+  &__save {
+    margin-top: 16px;
+    padding: 18px 0;
+    background-color: $darken;
+    border-radius: 4px;
+    transition: .5s;
+
+    & svg {
+      transition: .5s;
+      margin-left: 12px;
+    }
+
+    &:hover {
+      opacity: .9;
+    }
+  }
+
+  &__avatar-images {
+    width: 170px;
+    height: 170px;
+  }
+
+  &__banner-images {
+    max-width: 309px;
+    width: 100%;
+    height: 127px;
+
+    & img {
+      border-radius: 18px !important;
+    }
+  }
+
+  &__photos {
+    &-block {
+      margin-top: 16px;
+    }
+
+    &-upload {
+      margin-top: 16px;
+      padding: 12px 32px;
+      border-radius: 4px;
+      border: 2px solid #E1E2E2
+    }
+
+    &-text {
+      margin-top: 24px;
+    }
+
+    &-image {
+      &-size {
+        margin-top: 4px;
+      }
+
+      position: absolute;
+      left: 0;
+      top: 0;
+      object-fit: cover;
+      border-radius: 32px;
+      border: 1px solid rgba(247, 251, 250, 0.25);
+    }
+
+    &-button {
+      left: 16px;
+      top: 16px;
+      position: absolute;
+      padding: 8px;
+      border-radius: 50%;
+      border: 0;
+      background-color: $white;
+    }
+  }
+}
+
+.setting {
+  padding: 40px 24px;
+
+  &__block {
+    &+& {
+      margin-top: 64px;
+    }
+  }
+
+  &__title,
+  &_suptitle {
+    color: $lite-grey !important;
+  }
+
+  &__textarea {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid $darken-white;
+    padding: 12px 0;
+    height: 50px !important;
+    transition: .5s;
+
+    &::-webkit-scrollbar {
+
+      &,
+      &-track,
+      &-button {
+        background-color: $white !important;
+      }
+
+      &-thumb {
+        border: 4.5px solid $white !important;
+        background-color: $lite-grey !important;
+      }
+    }
+
+    &:focus {
+      height: 110px !important;
+    }
+  }
+
+  &__input {
+    border: 0;
+    min-width: calc(100% - 24px);
+    margin-bottom: 4px;
+
+    &-block {
+      margin-top: 24px;
+    }
+
+    &-content {
+      min-width: 100%;
+      padding: 16px 0;
+      border-bottom: 1px solid $darken-white;
+    }
+  }
+
+  &__wallet {
+    &-img {
+      padding: 12px;
+      border-radius: 50%;
+
+      &.blue {
+        background-color: $blue;
+      }
+    }
+
+    &-address {
+      &-block {
+        transition: .5s;
+      }
+    }
+
+    &-chain {
+      margin-top: 8px;
+      padding-right: 12px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 35%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $lime;
+      }
+    }
+
+    &-copy {
+      margin-left: 12px;
+    }
+
+    &-text {
+      margin-left: 16px;
+    }
+
+  }
+
+  &__notification {
+    &-block {
+      padding-bottom: 32px;
+      border-bottom: 1px solid $darken-white;
+    }
+
+    &-text {
+      max-width: 239px;
+    }
+
+    &-button {
+      width: 64px;
+      height: 32px;
+      padding: 4px;
+      border-radius: 8px;
+      background-color: $lite-grey;
+      margin-left: 8px;
+      transition: .5s;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: 8%;
+        border-radius: 4px;
+        background-color: $white;
+        transition: .5s;
+      }
+
+      &.active {
+        background-color: $blue;
+
+        &::after {
+          left: calc(100% - 30px);
+        }
+      }
+
+
+    }
+
+    &-desc {
+      margin-top: 8px;
+    }
+  }
+}
