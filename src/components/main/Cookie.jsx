@@ -1,4 +1,18 @@
 import { useEffect } from "react";
+
+const CookieMain = (title, clickFunc, text) => {
+  return (
+    <div className="cookie d-flex w-100 align-items-center justify-content-between">
+      <p className="cookie__text font-caption">
+        {title}
+      </p>
+      <span className="cookie__btn color-darken font-button pointer" onClick={clickFunc}>
+        {text}
+      </span>
+    </div>
+  )
+}
+
 const Cookie = () => {
   useEffect(() => {
     if (getCookie("acceptCookies") === "accept") {
@@ -21,8 +35,8 @@ const Cookie = () => {
   function setCookie(name, value, daysToExpire) {
     const expires = daysToExpire
       ? `expires=${new Date(
-          Date.now() + daysToExpire * 86400000
-        ).toUTCString()}`
+        Date.now() + daysToExpire * 86400000
+      ).toUTCString()}`
       : "";
     document.cookie = `${name}=${encodeURIComponent(
       value
@@ -40,17 +54,9 @@ const Cookie = () => {
   };
 
   return (
-    <div className="cookie d-flex w-100 align-items-center justify-content-between">
-      <p className="cookie__text font-caption">
-        We use cookies for better service.
-      </p>
-      <span
-        className="cookie__btn color-darken font-button"
-        onClick={acceptCookie}
-      >
-        ACCEPT
-      </span>
-    </div>
+    <>
+      {CookieMain("We use cookies for better service.", acceptCookie, "ACCEPT")}
+    </>
   );
 };
 

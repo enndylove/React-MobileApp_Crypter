@@ -2,6 +2,24 @@ import "../../styles/DarkCookie.scss";
 
 import { useEffect } from "react";
 
+
+const CookieDarkMain = (name, href, link, text, clickFunc, btn) => {
+  return (
+    <div className="cookie__dark d-flex align-items-center m-auto justify-content-between flex-nowrap">
+      <p className="cookie__dark-info font-caption">
+        {name}
+        <a className="color-white" href={href}>
+          {link}
+        </a>
+        {text}
+      </p>
+      <p className="cookie__accept font-caption color-white pointer" onClick={clickFunc}>
+        {btn}
+      </p>
+    </div>
+  )
+}
+
 const CookieDark = () => {
   useEffect(() => {
     if (getCookie("acceptCookies") === "accept") {
@@ -23,8 +41,8 @@ const CookieDark = () => {
   function setCookie(name, value, daysToExpire) {
     const expires = daysToExpire
       ? `expires=${new Date(
-          Date.now() + daysToExpire * 86400000
-        ).toUTCString()}`
+        Date.now() + daysToExpire * 86400000
+      ).toUTCString()}`
       : "";
     document.cookie = `${name}=${encodeURIComponent(
       value
@@ -50,24 +68,9 @@ const CookieDark = () => {
   };
 
   return (
-    <div className="cookie__dark d-flex align-items-center m-auto justify-content-between flex-nowrap">
-      <p className="cookie__dark-info font-caption">
-        We use 🍪
-        <a
-          className="color-white"
-          href="https://policies.google.com/technologies/cookies?hl=ru"
-        >
-          cookies
-        </a>
-        for better experience
-      </p>
-      <p
-        className="cookie__accept font-caption color-white"
-        onClick={acceptCookie}
-      >
-        Accept
-      </p>
-    </div>
+    <>
+      {CookieDarkMain("We use 🍪", "https://policies.google.com/technologies/cookies?hl=ru", "cookies", "for better experience", acceptCookie, "Accept")}
+    </>
   );
 };
 
