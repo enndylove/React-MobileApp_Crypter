@@ -159,7 +159,7 @@ app.get('/owned/profile', async (req, res) => {
         if (!existingData) {
           db.run(`
             INSERT INTO owned (address, image, name, description)
-            VALUES (?, ?, ?)
+            VALUES (?, ?, ?, ?)
           `, [
             profileData.walletAddress,
             data?.image,
@@ -272,18 +272,81 @@ app.get('/collections/profile', async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, 'build')));
+const dataFolderPath = path.join(__dirname, 'data');
+const databaseFolderPath = path.join(dataFolderPath, 'database');
+const emailsDBPath = path.join(databaseFolderPath, 'emails.db');
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-})
-app.get('/connectWallet', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.use(express.json());
+
+app.post('/api/emails', async (req, res) => {
+  try {
+    const emailsData = req.body;
+    console.log('Received emails data:', emailsData);
+    await fs.mkdir(dataFolderPath, { recursive: true });
+    const db = new sqlite3.Database(emailsDBPath);
+    db.run(`
+      CREATE TABLE IF NOT EXISTS info(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT
+      )
+    `);
+    db.get('SELECT * FROM info WHERE name = ? AND email = ?', [emailsData.name, emailsData.email], (selectError, existingData) => {
+      if (selectError) {
+        console.error('Error checking data in the database:', selectError);
+        res.status(500).json({ status: 'error', message: 'Internal Server Error', error: selectError.message });
+      } else if (existingData) {
+        res.json({ status: 'success', message: 'Data already exists in the database', data: existingData });
+      } else {
+        db.run(`
+          INSERT INTO info (name, email)
+          VALUES (?, ?)
+        `, emailsData.name, emailsData.email, (insertError) => {
+          if (insertError) {
+            console.error('Error inserting data into the database:', insertError);
+            res.status(500).json({ status: 'error', message: 'Internal Server Error', error: insertError.message });
+          } else {
+            db.close((closeError) => {
+              if (closeError) {
+                console.error('Error closing the database:', closeError);
+              }
+
+              res.json({ status: 'success', data: emailsData });
+            });
+          }
+        });
+      }
+    });
+  } catch (error) {
+    console.error('Error in /api/emails:', error);
+    res.status(500).json({ status: 'error', message: 'Internal Server Error', error: error.message });
+  }
 });
-app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-})
 
+app.get('/api/emails', async (req, res) => {
+  try {
+    const db = new sqlite3.Database(emailsDBPath);
+
+    db.all('SELECT * FROM info', (error, rows) => {
+      if (error) {
+        console.error('Error fetching data from the database:', error);
+        res.status(500).json({ status: 'error', message: 'Internal Server Error', error: error.message });
+      } else {
+        db.close((closeError) => {
+          if (closeError) {
+            console.error('Error closing the database:', closeError);
+          }
+          res.json({ status: 'success', data: rows });
+        });
+      }
+    });
+  } catch (error) {
+    console.error('Error in /api/emails:', error);
+    res.status(500).json({ status: 'error', message: 'Internal Server Error', error: error.message });
+  }
+});
+
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
