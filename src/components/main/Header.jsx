@@ -3,6 +3,7 @@ import { useApiArrow } from "../UI/pages/connectWallet/ChooseImg";
 import Moralis from "moralis";
 import Icons from './Icons/IconsHeader'
 import "../../styles/Header+.scss";
+// import cookie from "./Cookie";
 
 // COMPONENTS
 const HeaderLogo = (href, icon) => {
