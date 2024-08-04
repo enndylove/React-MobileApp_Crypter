@@ -161,7 +161,6 @@ const Setting = () => {
 
   return (
     <section className="section setting">
-
       <div className="setting__block setting__information" id="#profile">
         <h6 className="setting__title setting__information-title font-button">
           Information

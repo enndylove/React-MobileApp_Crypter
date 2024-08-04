@@ -4,54 +4,11 @@ import { useAccount } from "wagmi";
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi";
 import Picture from "./ChooseImg";
 
+import ChooseTags from "./components/ChooseTags";
+import ChooseUseApi from "./components/ChooseUseApi";
+import ChooseTagsBlock from "./components/ChooseTagsBlock";
+
 const CookieDark = lazy(() => import("../../../main/CookieDark"));
-
-const ChooseUseApi = (name, tag, icon, arrow) => {
-  return (
-    <div className="choose__useapi d-flex justify-content-between align-items-center w-100" data-url={name} data-tag={tag}>
-      <div className="d-flex align-items-center">
-        <img loading="lazy" data-src={icon} src={icon} alt="" className="choose__useapi-img" />
-        <h6 className="choose__useapi-name font-body2-bold color-white">
-          {name}
-        </h6>
-      </div>
-      <div className="choose__useapi-arrow">
-        {arrow}
-      </div>
-    </div>
-  )
-}
-
-function ChooseTags(querty) {
-  let elements = document.querySelectorAll(`.${querty}`);
-  elements.forEach((item) => {
-    item.addEventListener("click", () => {
-      let active = document.querySelector(`.${querty}.active`);
-      if (active) {
-        if (!item.classList.contains("active")) {
-          active.classList.remove("active");
-          item.classList.add("active");
-        }
-      } else {
-        item.classList.add("active");
-      }
-    });
-  });
-}
-const ChooseTagsBlock = (...name) => {
-  const Tags = () => {
-    name.forEach(tagName => {
-      return (
-        <span className="choose__tag">{tagName}</span>
-      )
-    })
-  }
-  return (
-    <div className="choose__tags d-flex align-items-center overflow-auto">
-      {Tags()}
-    </div>
-  )
-}
 
 const Choose = () => {
   const { connector } = useAccount();
@@ -68,12 +25,12 @@ const Choose = () => {
     ChooseTags("choose__useapi")
     ChooseTags("choose__tag")
   }, []);
-  const projectId = process.env.REACT_APP_WALLETCONNECT;
+  const projectId = process.env.REACT_APP_WALLETCONNECT  || undefined;
 
-  const metaDataName = process.env.REACT_APP_WALLETCONNECT_NAME,
-    metaDataDescription = process.env.REACT_APP_WALLETCONNECT_DESCRIPTION,
-    metaDataUrl = process.env.REACT_APP_WALLETCONNECT_URL,
-    metaDataIcons = process.env.REACT_APP_WALLETCONNECT_ICONS;
+  const metaDataName = process.env.REACT_APP_WALLETCONNECT_NAME || "Connect Crypter",
+    metaDataDescription = process.env.REACT_APP_WALLETCONNECT_DESCRIPTION || "Connect Crypter login walletConnect",
+    metaDataUrl = process.env.REACT_APP_WALLETCONNECT_URL || "https://localhost:5000/",
+    metaDataIcons = process.env.REACT_APP_WALLETCONNECT_ICONS || ["https://avatars.githubusercontent.com/u/37784886"];
 
   const chains = [mainnet];
   const wagmiConfig = defaultWagmiConfig({
