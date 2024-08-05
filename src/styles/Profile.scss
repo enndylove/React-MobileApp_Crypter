@@ -5,7 +5,8 @@ $darken-white: #E1E2E2;
 $purple: #B9A9FB;
 .profile {
     &__info {
-        left: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
         top: 0;
         z-index: -1;
     }

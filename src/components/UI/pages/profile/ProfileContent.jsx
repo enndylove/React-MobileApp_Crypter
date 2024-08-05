@@ -104,7 +104,7 @@ const ProfileContent = () => {
     setProfileFollowing, profileState;
     const fetchProfileDataFromServer = async () => {
       try {
-        const response = await fetch("/api/profile", {
+        const response = await fetch(`/api/profile?address=${localStorage.getItem("userAddress")}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -119,13 +119,13 @@ const ProfileContent = () => {
 
         setProfile((prevProfile) => ({
           ...prevProfile,
-          walletAddress: profileData.walletAddress,
-          walletBalance: profileData.walletBalance,
-          walletName: profileData.walletName,
-          walletUSDTBalance: profileData.walletUSDTBalance,
-          walletTagName: profileData.walletTagName,
-          walletStatus: profileData.walletStatus,
-          walletAddressClip: profileData.walletAddressClip,
+          walletAddress: profileData.address,
+          walletBalance: profileData.balance,
+          walletName: profileData.name,
+          walletUSDTBalance: profileData.usdtbalance,
+          walletTagName: profileData.tagname,
+          walletStatus: profileData.status,
+          walletAddressClip: profileData.addressClip,
         }));
 
         console.log("Profile Data from Server:", profileData);
@@ -258,34 +258,37 @@ const ProfileContent = () => {
   };
 
   return (
-    <div className="profile__info position-absolute w-100" style={{ maxWidth: 470 }}>
-      <div className="profile__content position-relative w-100">
+      <div className="wrapper">
+        <div className="profile__info position-absolute w-100" style={{maxWidth: 470}}>
+          <div className="profile__content position-relative w-100">
 
-        {ProfileContentPictures(Picture.IBanner, profile.walletAvatar)}
 
-        <div className="profile__content-info">
-          <div className="profile__content-content">
+            {ProfileContentPictures(Picture.IBanner, profile.walletAvatar)}
 
-            {ProfileContentName(profile.walletName, profile.walletStatus)}
+            <div className="profile__content-info">
+              <div className="profile__content-content">
 
-            {ProfileContentWallet(profile.walletTagName, copyToClipboard, profile.walletAddressClip)}
+                {ProfileContentName(profile.walletName, profile.walletStatus)}
 
-            {ProfileFollowButton(followProfile)}
+                {ProfileContentWallet(profile.walletTagName, copyToClipboard, profile.walletAddressClip)}
 
-            <div className="profile__content-subs d-flex align-items-center w-100">
+                {ProfileFollowButton(followProfile)}
 
-              {ProfileSub("profile__following", profileFollowing, "Following")}
-              {ProfileSub("profile__followers", profileFollowers, "Followers")}
+                <div className="profile__content-subs d-flex align-items-center w-100">
 
-            </div>
-            <div className="profile__infos">
-              {ProfileBio("We are laying the groundwork for web3 — the next generation of the internet full of limitless possibilities. Join the millions of creators, collectors, and curators who are on this journey.")}
+                  {ProfileSub("profile__following", profileFollowing, "Following")}
+                  {ProfileSub("profile__followers", profileFollowers, "Followers")}
+
+                </div>
+                <div className="profile__infos">
+                  {ProfileBio("We are laying the groundwork for web3 — the next generation of the internet full of limitless possibilities. Join the millions of creators, collectors, and curators who are on this journey.")}
+                </div>
+              </div>
             </div>
           </div>
+          <Created/>
         </div>
       </div>
-      <Created />
-    </div>
   );
 };
 
