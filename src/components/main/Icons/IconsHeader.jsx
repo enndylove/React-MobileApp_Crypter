@@ -1,3 +1,22 @@
+/**
+ * This is a collection of social media icons as SVG elements.
+ *
+ * @example
+ * import { IconLogo, IconCreate, IconFlash, IconClose, IconDisconnect, IconAppleStore, IconGooglePlay } from './path-to-file';
+ *
+ * // Use the icons in JSX
+ * <div>
+ *   <IconLogo />
+ *   <IconCreate />
+ *   <IconFlash />
+ *   <IconClose />
+ *   <IconDisconnect />
+ *   <IconAppleStore />
+ *   <IconGooglePlay />
+ * </div>
+ */
+
+
 const IconLogo =
   <svg
     className="header__logo"

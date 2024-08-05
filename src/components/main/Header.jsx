@@ -6,6 +6,13 @@ import "../../styles/Header+.scss";
 // import cookie from "./Cookie";
 
 // COMPONENTS
+
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {string} href - The URL to link to
+ * @param {JSX.Element} icon - The icon to display
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderLogo = (href, icon) => {
   return (
     <a href={href} className="bled-mode">
@@ -13,6 +20,12 @@ const HeaderLogo = (href, icon) => {
     </a>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {string} classes - The URL to link to
+ * @param {JSX.Element} icon - The icon to display
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderWidgets = (classes, icon) => {
   return (
     <div className={classes}>
@@ -20,6 +33,12 @@ const HeaderWidgets = (classes, icon) => {
     </div>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {function} clickFunc - The URL to link to
+ * @param {string} src - The icon to display
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderAvatar = (clickFunc, src) => {
   return (
     <div className="header__profile header__widget pointer" onClick={clickFunc}>
@@ -27,6 +46,12 @@ const HeaderAvatar = (clickFunc, src) => {
     </div>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {function} clickFunc - The URL to link to
+ * @param {JSX.Element} icon - The icon to display
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderProfileClose = (clickFunc, icon) => {
   return (
     <div className="header__profile-close d-flex align-items-center" onClick={clickFunc}>
@@ -34,6 +59,13 @@ const HeaderProfileClose = (clickFunc, icon) => {
     </div>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {string} name - The URL to link to
+ * @param {JSX.Element} tagname - The URL to link to
+ * @param {string} avatar - The icon to display
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderProfileInformation = (avatar, name, tagname) => {
   return (
     <div className="header__profile-person d-flex align-items-center">
@@ -49,6 +81,14 @@ const HeaderProfileInformation = (avatar, name, tagname) => {
     </div>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {string} title - The URL to link to
+ * @param {string} text - The URL to link to
+ * @param {function} disconnectFunc - The URL to link to
+ * @param {JSX.Element} icon - The icon to display
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderProfileDisconnect = (title, disconnectFunc, icon, text) => {
   return (
     <div className="header__profile-disconnect d-flex align-items-center justify-content-between">
@@ -62,6 +102,13 @@ const HeaderProfileDisconnect = (title, disconnectFunc, icon, text) => {
     </div>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {string} addressClip - The URL to link to
+ * @param {string} eth - The URL to link to
+ * @param {string} usdt - The URL to link to
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderProfileWallet = (addressClip, eth, usdt) => {
   return (
     <div className="header__profile-wallet">
@@ -82,6 +129,14 @@ const HeaderProfileWallet = (addressClip, eth, usdt) => {
     </div>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {string} href - The URL to link to
+ * @param {string} name - The URL to link to
+ * @param {string} classes - The URL to link to
+ * @param {JSX.Element} icon - The URL to link to
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderProfileNavItem = (href, name, icon, classes) => {
   return (
     <li className="nav__item d-flex align-items-center justify-content-between">
@@ -94,6 +149,14 @@ const HeaderProfileNavItem = (href, name, icon, classes) => {
     </li>
   )
 }
+/**
+ * HeaderLogo component that returns a link with an icon
+ * @param {string} href - The URL to link to
+ * @param {string} text - The URL to link to
+ * @param {string} classes - The URL to link to
+ * @param {JSX.Element} icon - The URL to link to
+ * @returns {JSX.Element} - A link with the given href and icon
+ */
 const HeaderDownloadButton = (href, classes, text, icon) => {
   return (
     <div className="w-100">
@@ -135,7 +198,10 @@ class Classes {
   }
 }
 
-
+/**
+ * Header component - the main header component with navigation and user information
+ * @returns {JSX.Element} - the header element
+ */
 const Header = () => {
   const [isUserRegistered, setisUserRegistered] = useState(false);
   const initialState = {
@@ -149,6 +215,11 @@ const Header = () => {
     walletAddressClip: "loading...",
   };
   const [profile, setProfile] = useState(initialState);
+
+  /**
+   * fetchProfileData function - fetches user profile data from the API
+   * @returns {Promise} - the promise of the API request
+   */
   const fetchProfileData = async () => {
     try {
       const address = localStorage.getItem("userAddress");

@@ -1,16 +1,36 @@
 import { useState, useEffect } from "react";
 import "../../../../styles/Created.scss";
 
+/**
+ * A utility class for loading images.
+ */
 class FoundImage {
+  /**
+   * The default image URL.
+   */
   static defaultImage = "https://assets-global.website-files.com/62df25f03ad4d8fbbf70bb37/63dc9d9e8bd4a0a9f9e66e74_634abe01c54c303a88d683d0_OS_signal-p-1600.png"
+
+  /**
+   * Loads an image and returns the image URL. If the image URL is empty, returns the default image URL.
+   * @param {string} image - The image URL.
+   * @returns {string} The loaded image URL.
+   */
   static loadImage(image) {
-    return image ? image : this.defaultImage
+    return image? image : this.defaultImage
   }
 }
 
+/**
+ * Renders a "no found NFTs" message.
+ * @param {string} title - The title of the message.
+ * @param {string} info - The information text.
+ * @param {string} hreflink - The link URL.
+ * @param {string} textLink - The link text.
+ * @returns {string} The rendered HTML.
+ */
 const NoFoundNFTs = (title, info, hreflink, textLink) => {
   const link = () => {
-    if (hreflink !== "" && textLink !== '') {
+    if (hreflink!== "" && textLink!== '') {
       return `
         <a href=${hreflink}>
           ${textLink}
@@ -33,6 +53,12 @@ const NoFoundNFTs = (title, info, hreflink, textLink) => {
     `
 }
 
+/**
+ * Renders an owned block.
+ * @param {string} imageSrc - The image URL.
+ * @param {string} name - The name of the NFT.
+ * @returns {string} The rendered HTML.
+ */
 const OwnedBlock = (imageSrc, name) => {
   return `
     <div class="created__block created__owned-block">
@@ -44,6 +70,15 @@ const OwnedBlock = (imageSrc, name) => {
     </div>
   `
 }
+
+/**
+ * Renders a collection block.
+ * @param {string} imageSrc - The image URL.
+ * @param {string} sumbol - The symbol of the NFT.
+ * @param {string} name - The name of the NFT.
+ * @param {string} amount - The amount of the NFT.
+ * @returns {string} The rendered HTML.
+ */
 const CollectionBlock = (imageSrc, sumbol, name, amount) => {
   return `
     <div class="created__block created__collection-block">
@@ -63,7 +98,7 @@ const CollectionBlock = (imageSrc, sumbol, name, amount) => {
         <div class="d-flex align-items-center">
           <span class="font-caption fw-800">Floor:</span>
           <p class="created__block-amount font-base color-white">
-            ${amount === '' ? "1.00" : amount} ETH
+            ${amount === ''? "1.00" : amount} ETH
           </p>
         </div>
       </div>
@@ -71,21 +106,34 @@ const CollectionBlock = (imageSrc, sumbol, name, amount) => {
   `
 }
 
+/**
+ * Renders a created tag.
+ * @param {string} classes - The CSS classes.
+ * @param {string} tagText - The tag text.
+ * @param {number} tagLenght - The tag length.
+ * @param {function} clickFunc - The click function.
+ * @param {string} color - The tag color.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 const CreatedTag = (classes, tagText, tagLenght, clickFunc, color) => {
   return (
-    <div className={`created__tag font-base ${classes}`} data-tag={tagText} onClick={clickFunc}>
-      {tagText}
-      <span className={`font-base ${color}`}>
+      <div className={`created__tag font-base ${classes}`} data-tag={tagText} onClick={clickFunc}>
+        {tagText}
+        <span className={`font-base ${color}`}>
         {tagLenght}
       </span>
-    </div>
+      </div>
   )
 }
 
+/**
+ * The main created component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 const Created = () => {
   const [LCreated, setLCreated] = useState(0),
-    [LCollection, setLCollection] = useState(0),
-    [LOwned, setLOwned] = useState(0);
+      [LCollection, setLCollection] = useState(0),
+      [LOwned, setLOwned] = useState(0);
 
   const onclickTag = (e) => {
     let tags = document.querySelectorAll("[data-tag]");
@@ -97,7 +145,7 @@ const Created = () => {
 
       let activeTag = document.querySelector(".created__tag.active");
       let activeblocks = document.querySelector(
-        `[data-block=${activeTag.getAttribute("data-tag")}]`
+          `[data-block=${activeTag.getAttribute("data-tag")}]`
       );
 
       blocks.forEach((item) => {
@@ -108,13 +156,14 @@ const Created = () => {
       });
     });
   };
+
   function blocksEmpty() {
     let createdBlock = document.querySelectorAll(".created__created-block"),
-      collectionBlock = document.querySelectorAll(".created__collection-block"),
-      ownedBlock = document.querySelectorAll(".created__owned-block"),
-      createdBlocks = document.querySelector(".created__blocks-created"),
-      ownedBlocks = document.querySelector(".created__blocks-owned"),
-      collectionBlocks = document.querySelector(".created__blocks-collection");
+        collectionBlock = document.querySelectorAll(".created__collection-block"),
+        ownedBlock = document.querySelectorAll(".created__owned-block"),
+        createdBlocks = document.querySelector(".created__blocks-created"),
+        ownedBlocks = document.querySelector(".created__blocks-owned"),
+        collectionBlocks = document.querySelector(".created__blocks-collection");
 
     if (createdBlock.length === 0) {
       createdBlocks.innerHTML = NoFoundNFTs("You have no created nft", "To create your own nft, follow the", "#", "link")
@@ -122,21 +171,22 @@ const Created = () => {
       setLCreated(createdBlock.length);
     }
     if (collectionBlock.length === 0) {
-      collectionBlocks.innerHTML = NoFoundNFTs("You have no collectible NFTs", "Collect NFTs to display in collections or reload page", "", "");
+      collectionBlocks.innerHTML = NoFoundNFTs("You have no collectible NFTs", "Collect NFTs to display in collections or reload page", "", "")
     } else {
       setLCollection(collectionBlock.length);
     }
 
     if (ownedBlock.length === 0) {
-      ownedBlocks.innerHTML = NoFoundNFTs("You do not own any NFTs", "create your own NFTs to display here or reload page", "", "");
+      ownedBlocks.innerHTML = NoFoundNFTs("You do not own any NFTs", "create your own NFTs to display here or reload page", "", "")
     } else {
       setLOwned(ownedBlock.length);
     }
   }
+
   useEffect(() => {
     const fetchProfileDataFromServer = async () => {
       let ownedBlocks = document.querySelector(".created__blocks-owned"),
-        collectionBlocks = document.querySelector(".created__blocks-collection");
+          collectionBlocks = document.querySelector(".created__blocks-collection");
 
       try {
         const defaultHeaders = {
@@ -151,7 +201,7 @@ const Created = () => {
           method: "GET",
           headers: defaultHeaders,
         });
-        if (!responseOwned.ok || !responseCollection.ok) {
+        if (!responseOwned.ok ||!responseCollection.ok) {
           blocksEmpty();
           throw new Error("Network response was not ok");
         }
@@ -170,7 +220,7 @@ const Created = () => {
           console.error('collectionData empty')
         } else {
           let collectionSetBlocks = collectionData?.collectionsNFT.map(
-            (data) => CollectionBlock(data.image, data.symbol, data.name, data.amount ? data.amount : '')
+              (data) => CollectionBlock(data.image, data.symbol, data.name, data.amount? data.amount : '')
           );
 
           if (collectionData) collectionBlocks.innerHTML += collectionSetBlocks;
@@ -184,27 +234,23 @@ const Created = () => {
   }, []);
 
   return (
-    <div className="created__main w-100">
-      <div className="created__tags d-flex align-items-center flex-nowrap w-100">
-
-        {CreatedTag("active", "Created", LCreated, onclickTag, "green")}
-        {CreatedTag("", "Collection", LCollection, onclickTag, "purple")}
-        {CreatedTag("", "Owned", LOwned, onclickTag, "pink")}
-
-      </div>
-      {/*  */}
-      <div className="created wrapper">
-        <div className="created__blocks created__blocks-created active" data-block="Created">
+      <div className="created__main w-100">
+        <div className="created__tags d-flex align-items-center flex-nowrap w-100">
+          {CreatedTag("active", "Created", LCreated, onclickTag, "green")}
+          {CreatedTag("", "Collection", LCollection, onclickTag, "purple")}
+          {CreatedTag("", "Owned", LOwned, onclickTag, "pink")}
 
         </div>
-        <div className="created__blocks created__blocks-collection" data-block="Collection">
-
-        </div>
-        <div className="created__blocks created__blocks-owned" data-block="Owned">
-
+        {/*  */}
+        <div className="created wrapper">
+          <div className="created__blocks created__blocks-created active" data-block="Created">
+          </div>
+          <div className="created__blocks created__blocks-collection" data-block="Collection">
+          </div>
+          <div className="created__blocks created__blocks-owned" data-block="Owned">
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 

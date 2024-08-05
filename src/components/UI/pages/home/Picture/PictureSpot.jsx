@@ -1,3 +1,17 @@
+/**
+ * Image imports for the spotlight section of the home page.
+ *
+ * This module exports an object containing all the image imports for the spotlight section.
+ * Each image is imported as a separate constant, and then exported as part of the default object.
+ *
+ * @example
+ * import images from './spotlightImages';
+ *
+ * // Use the images in your component
+ * <img src={images.ImgPost1} alt="Post 1 Image" />
+ * <img src={images.ImgAvatar1} alt="Avatar 1 Image" />
+ */
+
 import ImgPost1 from "../../../../../image/pages/home/spotlight/post/post1.webp";
 import ImgPost2 from "../../../../../image/pages/home/spotlight/post/post2.webp";
 import ImgPost3 from "../../../../../image/pages/home/spotlight/post/post3.webp";

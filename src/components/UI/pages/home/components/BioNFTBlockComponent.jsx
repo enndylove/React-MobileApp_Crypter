@@ -1,5 +1,19 @@
-import {Animated} from "react-animated-css";
+import { Animated } from "react-animated-css";
 
+/**
+ * BioNFTBlockComponent
+ *
+ * A React component that represents a single BioNFT block.
+ *
+ * @param {string} name - The name of the BioNFT.
+ * @param {number} total - The total sale amount of the BioNFT in ETH.
+ * @param {string} img - The image source of the BioNFT.
+ *
+ * @returns {JSX.Element} The BioNFT block component.
+ *
+ * @example
+ * <BioNFTBlockComponent name="My BioNFT" total={10} img="https://example.com/image.jpg" />
+ */
 let id = 0
 const BioNFTBlockComponent = (name, total, img) => {
     return (

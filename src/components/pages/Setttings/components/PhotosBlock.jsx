@@ -1,13 +1,36 @@
 import Icons from "../Icons";
 
-
+/**
+ * A class that provides utility functions for loading images
+ */
 class ImageFactory {
-    static defaultImage = "https://i.ibb.co/PWhrW7k/Frame-1361.jpg"
+    /**
+     * The default image URL to use when no URL is provided
+     * @type {string}
+     */
+    static defaultImage = "https://i.ibb.co/PWhrW7k/Frame-1361.jpg";
+
+    /**
+     * Loads an image from a URL
+     * @param {string|null} url - The URL of the image to load
+     * @returns {string} The URL of the loaded image
+     */
     static loadImage(url) {
-        return url ? URL.createObjectURL(url) : this.defaultImage
+        return url ? URL.createObjectURL(url) : this.defaultImage;
     }
 }
 
+
+/**
+ * A functional component that renders a block of photos
+ * @param {string} classImages - The CSS class to apply to the photos block
+ * @param {string} htmlFor - The id of the associated label element
+ * @param {string} image - The URL of the image to display
+ * @param {function} setImages - A callback function to set the new image when a file is selected
+ * @param {string} title - The title of the photo
+ * @param {string} info - Additional information about the photo
+ * @returns {JSX.Element} A JSX element representing the photo block
+ */
 const PhotosBLock = (classImages, htmlFor, image, setImages, title, info) => {
     return (
         <div className="content__photos-block">

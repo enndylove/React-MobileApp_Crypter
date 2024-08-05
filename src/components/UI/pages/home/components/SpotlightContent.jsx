@@ -1,6 +1,41 @@
 import {Animated} from "react-animated-css";
 
+/**
+ * SpotlightContent component
+ *
+ * Renders a spotlight content block with an image, title, price, and avatars.
+ *
+ * @param {string} imageSrc - The source URL of the image.
+ * @param {string} title - The title of the spotlight content.
+ * @param {string} price - The price of the spotlight content in ETH.
+ * @param {array} avatarsSrc - An array of source URLs for the avatars.
+ *
+ * @returns {JSX.Element} The spotlight content block.
+ *
+ * @example
+ * import SpotlightContent from './SpotlightContent';
+ *
+ * const imageSrc = 'https://example.com/image.jpg';
+ * const title = 'Example Title';
+ * const price = '1.23';
+ * const avatarsSrc = [
+ *   'https://example.com/avatar1.jpg',
+ *   'https://example.com/avatar2.jpg',
+ *   'https://example.com/avatar3.jpg',
+ * ];
+ *
+ * const spotlightContent = SpotlightContent(imageSrc, title, price, avatarsSrc);
+ *
+ * return spotlightContent;
+ */
 const SpotlightContent = (imageSrc, title, price, avatarsSrc) => {
+    /**
+     * AvatarBlock component
+     *
+     * Renders a block of avatars.
+     *
+     * @returns {JSX.Element} The avatar block.
+     */
     const AvatarBlock = () => {
         if (avatarsSrc && avatarsSrc.length > 0) {
             return avatarsSrc.map((src, index) => (

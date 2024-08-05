@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 import Picture from "./Picture";
 import Created from "./Created";
 
+/**
+ * ProfileContentName: A functional component that displays the name and status of a user's profile.
+ * @param {string} name - The name of the user.
+ * @param {string} status - The status of the user.
+ * @returns {JSX.Element} A JSX element that represents the profile name and status.
+ * @example
+ * ProfileContentName("John Doe", "Available")
+ */
 const ProfileContentName = (name, status) => {
   return (
     <h4 className="profile__content-name font-h4 color-darken d-flex align-items-center flex-wrap">
@@ -24,6 +32,14 @@ const ProfileContentName = (name, status) => {
   )
 }
 
+/**
+ * ProfileContentPictures: A functional component that displays the banner and avatar images of a user's profile.
+ * @param {string} bannerSrc - The URL of the banner image.
+ * @param {string} avatarSrc - The URL of the avatar image.
+ * @returns {JSX.Element} A JSX element that represents the profile pictures.
+ * @example
+ * ProfileContentPictures("https://example.com/banner.jpg", "https://example.com/avatar.jpg")
+ */
 const ProfileContentPictures = (bannerSrc, avatarSrc) => {
   return (
     <>
@@ -33,6 +49,15 @@ const ProfileContentPictures = (bannerSrc, avatarSrc) => {
   )
 }
 
+/**
+ * ProfileContentWallet: A functional component that displays the tag name and address of a user's wallet.
+ * @param {string} tagname - The tag name of the wallet.
+ * @param {Function} copyFunc - A function that copies the wallet address to clipboard.
+ * @param {string} addressClip - The wallet address to be displayed and copied.
+ * @returns {JSX.Element} A JSX element that represents the profile wallet information.
+ * @example
+ * ProfileContentWallet("Personal Wallet", copyToClipboard, "0x1234567890...")
+ */
 const ProfileContentWallet = (tagname, copyFunc, addressClip) => {
   return (
     <div className="profile__content-wallet d-flex align-items-center flex-wrap">
@@ -47,6 +72,13 @@ const ProfileContentWallet = (tagname, copyFunc, addressClip) => {
   )
 }
 
+/**
+ * ProfileFollowButton: A functional component that displays a follow button and handles its click event.
+ * @param {Function} clickFunc - A function that handles the click event of the follow button.
+ * @returns {JSX.Element} A JSX element that represents the follow button.
+ * @example
+ * ProfileFollowButton(followProfile)
+ */
 const ProfileFollowButton = (clickFunc) => {
   return (
     <div onClick={clickFunc} className="profile__follow pointer font-button color-darken d-flex align-items-center">
@@ -56,6 +88,15 @@ const ProfileFollowButton = (clickFunc) => {
   )
 }
 
+/**
+ * ProfileSub: A functional component that displays the following and followers count of a user's profile.
+ * @param {string} blockClass - The CSS class of the parent block.
+ * @param {number} count - The count to be displayed.
+ * @param {string} text - The text to be displayed along with the count.
+ * @returns {JSX.Element} A JSX element that represents the following and followers count.
+ * @example
+ * ProfileSub("profile__following", 123, "Following")
+ */
 const ProfileSub = (blockClass, count, text) => {
   return (
     <div className={`${blockClass} profile__sub`}>
@@ -70,6 +111,13 @@ const ProfileSub = (blockClass, count, text) => {
   )
 }
 
+/**
+ * ProfileBio: A functional component that displays the bio of a user's profile.
+ * @param {string} info - The bio of the user.
+ * @returns {JSX.Element} A JSX element that represents the profile bio.
+ * @example
+ * ProfileBio("We are laying the groundwork for web3 — the next generation of the internet full of limitless possibilities. Join the millions of creators, collectors, and curators who are on this journey.")
+ */
 const ProfileBio = (info) => {
   return (
     <div className="profile__infos-bio">

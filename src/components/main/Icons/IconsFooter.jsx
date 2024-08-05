@@ -1,3 +1,21 @@
+/**
+ * This is a collection of social media icons as SVG elements.
+ * It includes Instagram, Twitter, Facebook, and an empty icon.
+ * There is also a logo icon.
+ *
+ * @example
+ * import { IconInstagram, IconTwitter, IconFacebook, IconEmpty, IconLogo } from './path-to-file';
+ *
+ * // Use the icons in JSX
+ * <div>
+ *   <IconInstagram />
+ *   <IconTwitter />
+ *   <IconFacebook />
+ *   <IconEmpty />
+ *   <IconLogo />
+ * </div>
+ */
+
 const IconInstagram =
   <svg
     width="25"

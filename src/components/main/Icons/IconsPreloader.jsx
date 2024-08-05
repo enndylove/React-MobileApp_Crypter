@@ -1,3 +1,16 @@
+/**
+ * This is a collection of social media icons as SVG elements.
+ * There is also a logo icon.
+ *
+ * @example
+ * import { IconLogo } from './path-to-file';
+ *
+ * // Use the icons in JSX
+ * <div>
+ *   <IconLogo />
+ * </div>
+ */
+
 const IconLogo =
   <svg
     className="preloader-img preloader-status active"

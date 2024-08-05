@@ -1,3 +1,10 @@
+/**
+ * IconAppleStore is an SVG icon representing the Apple Store.
+ *
+ * @example
+ * import { IconAppleStore } from './icons';
+ * const appleStoreIcon = <IconAppleStore />;
+ */
 const IconAppleStore =
   <svg
     className="dowload__button-icon"
