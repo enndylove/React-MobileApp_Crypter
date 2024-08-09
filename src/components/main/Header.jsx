@@ -224,7 +224,8 @@ const Header = () => {
     try {
       const address = localStorage.getItem("userAddress");
       if (!address) {
-        window.location = "/connectWallet";
+        // window.location = "/connectWallet";
+        console.log("Wallet is no connecting...");
         return;
       } else {
         setisUserRegistered(true);
@@ -427,7 +428,7 @@ const Header = () => {
     }
   }
   const disconnectApi = async () => {
-    window.location = "/connectWallet";
+    console.log('Wallet is not connecting');
   };
 
   return (
