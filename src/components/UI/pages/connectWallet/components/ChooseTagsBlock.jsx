@@ -21,7 +21,7 @@
  * };
  * ```
  */
-const ChooseTagsBlock = (...name) => {
+const ChooseTagsBlock = (name) => {
     /**
      * Tags component
      *

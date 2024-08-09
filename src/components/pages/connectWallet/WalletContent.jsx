@@ -37,7 +37,7 @@ const Wallet = (logo, hrefLogo, title, arrow, info) => {
                     {info}
                 </p>
             </div>
-            <div className="wallet__back" onClick={() => window.history.back()}></div>
+            <a className="wallet__back" href={"/"}></a>
         </section>
     )
 }
