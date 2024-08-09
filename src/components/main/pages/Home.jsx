@@ -12,7 +12,7 @@ const Download = lazy(() => import("../../UI/main/Download"));
 const Footer = lazy(() => import("../Footer"));
 const Cookie = lazy(() => import("../Cookie"));
 
-const LazyLoad = lazy(() => import("../../Lazyload"));
+const LazyLoad = lazy(() => import("../Lazyload"));
 
 /**
  * HomePage Component
