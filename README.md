@@ -542,7 +542,7 @@ class ImageFactory {
 }
 ```
 
-
+### [Figma link](https://www.figma.com/design/I6EpT8xrNzIQU4tvAiHCW9/Crypter-v.2---Figma?node-id=242-11219&t=wndgjF07m2xuYBUS-1)
 ## License
 #### This project is licensed under the [MIT License](https://github.com/enndylove/React-MobileApp_Crypter/blob/main/LICENSE.md).
 
